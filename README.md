@@ -39,27 +39,6 @@ cd ./../bin/cli && ./burgers-api
 
 Stop the app with ^C.
 
-## Steps to build Front-End
-
-```shell
-cd ./front-end/
-```
-
-```shell
-npm install
-```
-
-for Development:
-
-```shell
-npm run dev
-```
-for Production:
-
-```shell
-npm run prod
-```
-
 ## Dockerized app
 
 Run the App
@@ -87,3 +66,25 @@ Linux:
 ```shell
 ~/go/bin/swag init -g cmd/main/main.go --parseInternal --parseDependency --parseDepth 1  && \ 
 ~/go/bin/swag fmt -g cmd/main/main.go 
+
+## Steps to build Front-End
+
+```shell
+cd ./front-end/
+```
+
+```shell
+npm install
+```
+
+for Development:
+
+```shell
+npm run dev
+```
+
+for Production:
+
+```shell
+npm run prod
+```
