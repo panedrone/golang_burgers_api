@@ -5,6 +5,7 @@ import (
 	"context"
 	"fmt"
 	"gorm.io/gorm"
+	"math/rand/v2"
 	"strings"
 )
 
@@ -32,11 +33,6 @@ func (b *burgersDao) Read(ctx context.Context, bID int64) (res *model.Burger, er
 	return
 }
 
-func (b *burgersDao) FindRandom(ctx context.Context) (*model.Burger, error) {
-	//TODO implement me
-	panic("implement me")
-}
-
 func (b *burgersDao) FindByName(ctx context.Context, cName string) (res []*model.Burger, err error) {
 	key := fmt.Sprintf("%%%s%%", strings.ToLower(cName))
 	err = b.db.WithContext(ctx).Model(&model.Burger{}).
@@ -52,5 +48,34 @@ func (b *burgersDao) FindByIngredient(ctx context.Context, cIngredientName strin
 	err = b.db.WithContext(ctx).Model(&model.Burger{}).
 		Preload(model.BurgerIngredients).
 		Where("id in (?)", subQuery).Find(&res).Error
+	return
+}
+
+func (b *burgersDao) ListAllStartingLetters(ctx context.Context) (res []string, err error) {
+	// The first character has an index of 1.
+	err = b.db.WithContext(ctx).Model(&model.Burger{}).
+		Select("DISTINCT(UPPER(substr(burger_name, 1, 1)))").Find(&res).Error
+	return
+}
+
+func (b *burgersDao) ListAllByFirstLetter(ctx context.Context, letter rune) (res []*model.Burger, err error) {
+	cName := strings.ToLower(string(letter))
+	key := fmt.Sprintf("%s%%", cName)
+	err = b.db.WithContext(ctx).Model(&model.Burger{}).
+		Preload(model.BurgerIngredients).
+		Where("LOWER(burger_name) LIKE ?", key).Find(&res).Error
+	return
+}
+
+func (b *burgersDao) FindRandom(ctx context.Context) (res *model.Burger, err error) {
+	var count int64
+	err = b.db.WithContext(ctx).Model(&model.Burger{}).Count(&count).Error
+	if err != nil {
+		return
+	}
+	offset := rand.IntN(int(count))
+	err = b.db.WithContext(ctx).Model(&model.Burger{}).
+		Preload(model.BurgerIngredients).
+		Offset(offset).First(&res).Error
 	return
 }

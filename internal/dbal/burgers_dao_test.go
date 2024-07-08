@@ -109,3 +109,37 @@ func Test_Create(t *testing.T) {
 	}
 	shared.PrintLnCyan(res)
 }
+
+func Test_FindRandom(t *testing.T) {
+	bDao := NewBurgersDao()
+	res, err := bDao.FindRandom(ctx)
+	if err != nil {
+		t.Fatalf("Error: %s", err)
+		return
+	}
+	shared.PrintLnCyan(res)
+}
+
+func Test_ListAllByFirstLetter(t *testing.T) {
+	bDao := NewBurgersDao()
+	res, err := bDao.ListAllByFirstLetter(ctx, '2')
+	if err != nil {
+		t.Fatalf("Error: %s", err)
+		return
+	}
+	for _, v := range res {
+		shared.PrintLnCyan(v)
+	}
+}
+
+func Test_ListAllStartingLetters(t *testing.T) {
+	bDao := NewBurgersDao()
+	res, err := bDao.ListAllStartingLetters(ctx)
+	if err != nil {
+		t.Fatalf("Error: %s", err)
+		return
+	}
+	for _, v := range res {
+		shared.PrintLnCyan(v)
+	}
+}

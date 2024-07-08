@@ -13,4 +13,7 @@ type BurgersDao interface {
 	Read(ctx context.Context, cID int64) (*model.Burger, error)
 
 	FindRandom(ctx context.Context) (*model.Burger, error)
+
+	ListAllStartingLetters(ctx context.Context) (res []string, err error)
+	ListAllByFirstLetter(ctx context.Context, letter rune) (res []*model.Burger, err error)
 }

@@ -1,0 +1,7 @@
+{
+  "error": "Bad Request",
+  "details": {
+    "t_priority": "an Integer 1..10 expected",
+    "t_date": "parsing time '2024-04-21 04:50:21=;: extra text: '='"
+  }
+}
