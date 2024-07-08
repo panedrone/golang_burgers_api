@@ -20,21 +20,21 @@ Once deployed, refer to http://{host}/swagger/index.html for details.
 Build and Run on Windows x64
 
 ```shell
-cd app; if ($?) { go build -o ./../bin/cli/spy_cat_agency.exe cmd/main/main.go}
+cd app; if ($?) { go build -o ./../bin/cli/burgers-api.exe cmd/main/main.go}
 ```
 
 ```shell
-cd ./../bin/cli; if ($?) { ./spy_cat_agency.exe }
+cd ./../bin/cli; if ($?) { ./burgers-api.exe }
 ```
 
 Build and Run on Linux
 
 ```shell
-cd app/ && env GOOS=linux GOARCH=amd64 && go build -o ./../bin/cli/spy_cat_agency cmd/main/main.go
+cd app/ && env GOOS=linux GOARCH=amd64 && go build -o ./../bin/cli/burgers-api cmd/main/main.go
 ```
 
 ```shell
-cd ./../bin/cli && ./spy_cat_agency
+cd ./../bin/cli && ./burgers-api
 ```
 
 Stop the app with ^C.
