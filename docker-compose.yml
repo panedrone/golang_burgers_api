@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  burgers-api:
+    network_mode: "bridge"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: burgers-api
+    container_name:  burgers-api
+    privileged: true
+    restart: always
+    ports:
+      - '3102:8080'
+    volumes:
+      - ./front-end:/apps/front-end
+      - ./db:/apps/db
