@@ -66,6 +66,7 @@ Linux:
 ```shell
 ~/go/bin/swag init -g cmd/main/main.go --parseInternal --parseDependency --parseDepth 1  && \ 
 ~/go/bin/swag fmt -g cmd/main/main.go 
+```
 
 ## Steps to build Front-End
 
@@ -82,7 +83,6 @@ for Development:
 ```shell
 npm run dev
 ```
-
 for Production:
 
 ```shell
