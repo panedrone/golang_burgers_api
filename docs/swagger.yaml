@@ -1,0 +1,14 @@
+basePath: /api
+consumes:
+- application/json
+host: 127.0.0.1:8080
+info:
+  contact: {}
+  title: Burgers API
+  version: 0.0.1
+paths: {}
+produces:
+- application/json
+schemes:
+- http
+swagger: "2.0"
