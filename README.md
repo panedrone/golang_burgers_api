@@ -79,12 +79,11 @@ docker-compose -f ./docker-compose.yml down
 Windows:
 
 ```shell
-cd app/ && swag init -g cmd/main/main.go --parseInternal --parseDependency --parseDepth 1  && swag fmt -g cmd/main/main.go
+swag init -g cmd/main/main.go --parseInternal --parseDependency --parseDepth 1  && swag fmt -g cmd/main/main.go
 ```
 
 Linux:
 
 ```shell
-cd app/ && \ 
 ~/go/bin/swag init -g cmd/main/main.go --parseInternal --parseDependency --parseDepth 1  && \ 
 ~/go/bin/swag fmt -g cmd/main/main.go 
