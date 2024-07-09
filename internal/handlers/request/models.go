@@ -6,12 +6,12 @@ import (
 	"time"
 )
 
-type SpyCatUri struct {
-	CId int64 `uri:"c_id"  binding:"required" example:"1"`
+type BurgerUri struct {
+	BurgerId int64 `uri:"burger_id"  binding:"required" example:"1"`
 }
 
-func BindSpyCatUri(ctx *gin.Context) (*SpyCatUri, error) {
-	var uri SpyCatUri
+func BindBurgerUri(ctx *gin.Context) (*BurgerUri, error) {
+	var uri BurgerUri
 	if err := ctx.ShouldBindUri(&uri); err != nil {
 		resp.Abort400BadUri(ctx, err)
 		return nil, err
