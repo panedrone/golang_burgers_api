@@ -6,11 +6,11 @@ import (
 )
 
 type BurgersDao interface {
-	FindByName(ctx context.Context, cName string) (res []*model.Burger, err error)
-	FindByIngredient(ctx context.Context, cIngredientName string) (res []*model.Burger, err error)
+	SearchByName(ctx context.Context, cName string) (res []*model.Burger, err error)
+	SearchByIngredient(ctx context.Context, cIngredientName string) (res []*model.Burger, err error)
 
 	Create(ctx context.Context, item *model.Burger) error
-	Read(ctx context.Context, cID int64) (*model.Burger, error)
+	LookupByID(ctx context.Context, cID int64) (*model.Burger, error)
 
 	FindRandom(ctx context.Context) (*model.Burger, error)
 
@@ -20,5 +20,5 @@ type BurgersDao interface {
 
 type IngredientsDao interface {
 	FindByName(ctx context.Context, cName string) (res *model.Ingredient, err error)
-	Read(ctx context.Context, iID int64) (*model.Ingredient, error)
+	LookupIngredientByID(ctx context.Context, iID int64) (*model.Ingredient, error)
 }

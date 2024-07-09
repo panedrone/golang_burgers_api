@@ -17,3 +17,16 @@ func BindBurgerUri(ctx *gin.Context) (*BurgerUri, error) {
 	}
 	return &uri, nil
 }
+
+type IngredientUri struct {
+	IngredientId int64 `uri:"ingredient_id"  binding:"required" example:"1"`
+}
+
+func BindIngredientUri(ctx *gin.Context) (*IngredientUri, error) {
+	var uri IngredientUri
+	if err := ctx.ShouldBindUri(&uri); err != nil {
+		resp.Abort400BadUri(ctx, err)
+		return nil, err
+	}
+	return &uri, nil
+}

@@ -8,7 +8,7 @@ import (
 	"log"
 )
 
-// @schemes	http
+// @schemes	test_http
 // @produce	json
 // @version	0.0.1
 //
@@ -33,7 +33,40 @@ func main() {
 
 	swagger.Setup(myRouter)
 
-	handlers.Setup(myRouter)
+	setupHandlers(myRouter)
 
 	log.Fatal(myRouter.Run(":8080"))
+}
+
+func setupHandlers(myRouter *gin.Engine) {
+
+	myRouter.Static("/static", "./front-end/static")
+
+	// === panedrone: "http://localhost:8080" to render index.html
+
+	myRouter.StaticFile("/", "./front-end/index.html")
+
+	/////////////////////////////////////////
+
+	groupApi := myRouter.Group("/api")
+
+	/////////////////////////////////////////
+
+	{
+		handleBurgers := handlers.NewBurgers()
+		groupBurgers := groupApi.Group("/burgers")
+		groupBurgers.POST("/", handleBurgers.BurgerCreate)
+		groupBurgers.GET("/:burger_id", handleBurgers.BurgerLookupByID)
+		groupBurgers.GET("/search", handleBurgers.BurgersSearchByName)
+		groupBurgers.GET("/search/by-ingredient", handleBurgers.BurgersSearchByIngredient)
+		groupBurgers.GET("/indexes", handleBurgers.BurgersListAllStartingLetters)
+		groupBurgers.GET("/by-index", handleBurgers.BurgersListAllByFirstLetter)
+		groupBurgers.GET("/random", handleBurgers.BurgerFindRandom)
+	}
+	{
+		handleIngredients := handlers.NewIngredients()
+		groupIngredients := groupApi.Group("/ingredients")
+		groupIngredients.GET("/search", handleIngredients.IngredientSearchByName)
+		groupIngredients.GET("/:ingredient_id", handleIngredients.IngredientLookupByID)
+	}
 }

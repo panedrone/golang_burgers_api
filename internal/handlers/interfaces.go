@@ -4,15 +4,20 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type BurgersHandles interface {
-	FindByName(ctx *gin.Context)
-	FindByIngredient(ctx *gin.Context)
+type Burgers interface {
+	BurgersSearchByName(ctx *gin.Context)
+	BurgersSearchByIngredient(ctx *gin.Context)
 
-	Create(ctx *gin.Context)
-	Read(ctx *gin.Context)
+	BurgerCreate(ctx *gin.Context)
+	BurgerLookupByID(ctx *gin.Context)
 
-	FindRandom(ctx *gin.Context)
+	BurgerFindRandom(ctx *gin.Context)
 
-	ListAllStartingLetters(ctx *gin.Context)
-	ListAllByFirstLetter(ctx *gin.Context)
+	BurgersListAllStartingLetters(ctx *gin.Context)
+	BurgersListAllByFirstLetter(ctx *gin.Context)
+}
+
+type Ingredients interface {
+	IngredientSearchByName(ctx *gin.Context)
+	IngredientLookupByID(ctx *gin.Context)
 }

@@ -8,11 +8,11 @@ GET http://localhost:8080/api/burgers/search/by-ingredient?name=jal
 
 ### List All starting Letters of Burger Names
 
-GET http://localhost:8080/api/burgers/index
+GET http://localhost:8080/api/burgers/indexes
 
 ### List all Burgers by first letter
 
-GET http://localhost:8080/api/burgers/by-first?letter=t
+GET http://localhost:8080/api/burgers/by-index?letter=t
 
 ### Lookup full BURGER details by id
 

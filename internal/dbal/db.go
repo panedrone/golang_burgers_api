@@ -57,3 +57,7 @@ func AutoMigrate() error {
 func NewBurgersDao() dao.BurgersDao {
 	return dao.NewBurgersDao(db)
 }
+
+func NewIngredientsDao() dao.IngredientsDao {
+	return dao.NewIngredientsDao(db)
+}

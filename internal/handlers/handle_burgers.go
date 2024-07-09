@@ -10,30 +10,34 @@ import (
 	"net/http"
 )
 
-type burgersHandles struct {
+type burgers struct {
 	bDao dao.BurgersDao
 }
 
-func NewBurgersHandles() BurgersHandles {
-	return &burgersHandles{
+func NewBurgers() Burgers {
+	return &burgers{
 		bDao: dbal.NewBurgersDao(),
 	}
 }
 
-// FindByName
+// BurgersSearchByName
 //
 //	@Summary	Search Burgers by Name
 //	@Tags		Burgers
-//	@Id			Burgers_FindByName
+//	@Id			BurgersSearchByName
 //	@Produce	json
 //	@Success	200	{object}	[]model.Burger	"Burgers list"
 //	@Failure	500
 //	@Security	none
 //	@Router		/burgers/search [get]
 //	@Param		name	query		string	false	"Name Key"	example(abc)
-func (b burgersHandles) FindByName(ctx *gin.Context) {
+func (b *burgers) BurgersSearchByName(ctx *gin.Context) {
 	name := ctx.Query("name")
-	res, err := b.bDao.FindByName(ctx, name)
+	if len(name) == 0 {
+		resp.Abort400hBadRequest(ctx, "name is required")
+		return
+	}
+	res, err := b.bDao.SearchByName(ctx, name)
 	if err != nil {
 		resp.Abort500(ctx, err)
 		return
@@ -41,20 +45,20 @@ func (b burgersHandles) FindByName(ctx *gin.Context) {
 	resp.JSON(ctx, http.StatusOK, res)
 }
 
-// FindByIngredient
+// BurgersSearchByIngredient
 //
 //	@Summary	Search Burgers by FindByIngredient Name
 //	@Tags		Burgers
-//	@Id			Burgers_FindByIngredient
+//	@Id			BurgersSearchByIngredient
 //	@Produce	json
 //	@Success	200	{object}	[]model.Burger	"Burgers list"
 //	@Failure	500
 //	@Security	none
 //	@Router		/burgers/search/by-ingredient [get]
 //	@Param		name	query		string	false	"Ingredient Name Key"	example(abc)
-func (b burgersHandles) FindByIngredient(ctx *gin.Context) {
+func (b *burgers) BurgersSearchByIngredient(ctx *gin.Context) {
 	name := ctx.Query("name")
-	res, err := b.bDao.FindByIngredient(ctx, name)
+	res, err := b.bDao.SearchByIngredient(ctx, name)
 	if err != nil {
 		resp.Abort500(ctx, err)
 		return
@@ -62,18 +66,18 @@ func (b burgersHandles) FindByIngredient(ctx *gin.Context) {
 	resp.JSON(ctx, http.StatusOK, res)
 }
 
-// Create
+// BurgerCreate
 //
 //	@Summary	Create Burger
 //	@Tags		Burgers
-//	@Id			Burgers_Create
+//	@Id			BurgerCreate
 //	@Accept		json
 //	@Success	201
 //	@Failure	500
 //	@Security	none
 //	@Router		/burgers [post]
 //	@Param		json	body	model.Burger	true	"Burger data"
-func (b burgersHandles) Create(ctx *gin.Context) {
+func (b *burgers) BurgerCreate(ctx *gin.Context) {
 	var req model.Burger
 	if err := request.BindJSON(ctx, &req); err != nil {
 		return
@@ -85,11 +89,11 @@ func (b burgersHandles) Create(ctx *gin.Context) {
 	}
 }
 
-// Read
+// BurgerLookupByID
 //
 //	@Summary	Lookup full Burger details by id
 //	@Tags		Burgers
-//	@Id			Burgers_Read
+//	@Id			BurgerLookupByID
 //	@Produce	json
 //	@Success	200	{object}	model.Burger	"Burger data"
 //	@Failure	400
@@ -98,13 +102,13 @@ func (b burgersHandles) Create(ctx *gin.Context) {
 //	@Security	none
 //	@Router		/burgers/{burger_id} [get]
 //	@Param		burger_id	path	integer	true	"Burger ID"
-func (b burgersHandles) Read(ctx *gin.Context) {
+func (b *burgers) BurgerLookupByID(ctx *gin.Context) {
 	uri, err := request.BindBurgerUri(ctx)
 	if err != nil {
 		resp.Abort400BadUri(ctx, err)
 		return
 	}
-	res, err := b.bDao.Read(ctx, uri.BurgerId)
+	res, err := b.bDao.LookupByID(ctx, uri.BurgerId)
 	if err != nil {
 		resp.Abort500(ctx, err)
 		return
@@ -112,17 +116,17 @@ func (b burgersHandles) Read(ctx *gin.Context) {
 	resp.JSON(ctx, http.StatusOK, res)
 }
 
-// FindRandom
+// BurgerFindRandom
 //
 //	@Summary	Lookup a random Burger
 //	@Tags		Burgers
-//	@Id			Burgers_FindRandom
+//	@Id			BurgerFindRandom
 //	@Produce	json
 //	@Success	200	{object}	model.Burger	"Burger"
 //	@Failure	500
 //	@Security	none
 //	@Router		/burgers/random [get]
-func (b burgersHandles) FindRandom(ctx *gin.Context) {
+func (b *burgers) BurgerFindRandom(ctx *gin.Context) {
 	res, err := b.bDao.FindRandom(ctx)
 	if err != nil {
 		resp.Abort500(ctx, err)
@@ -131,17 +135,17 @@ func (b burgersHandles) FindRandom(ctx *gin.Context) {
 	resp.JSON(ctx, http.StatusOK, res)
 }
 
-// ListAllStartingLetters
+// BurgersListAllStartingLetters
 //
 //	@Summary	List All starting Letters of Burger Names
 //	@Tags		Burgers
-//	@Id			Burgers_ListAllStartingLetters
+//	@Id			BurgersListAllStartingLetters
 //	@Produce	json
 //	@Success	200	{object}	[]string	"Letter list"
 //	@Failure	500
 //	@Security	none
-//	@Router		/burgers/index [get]
-func (b burgersHandles) ListAllStartingLetters(ctx *gin.Context) {
+//	@Router		/burgers/indexes [get]
+func (b *burgers) BurgersListAllStartingLetters(ctx *gin.Context) {
 	res, err := b.bDao.ListAllStartingLetters(ctx)
 	if err != nil {
 		resp.Abort500(ctx, err)
@@ -150,18 +154,18 @@ func (b burgersHandles) ListAllStartingLetters(ctx *gin.Context) {
 	resp.JSON(ctx, http.StatusOK, res)
 }
 
-// ListAllByFirstLetter
+// BurgersListAllByFirstLetter
 //
 //	@Summary	List All Burgers By First Letter
 //	@Tags		Burgers
-//	@Id			Burgers_ListAllByFirstLetter
+//	@Id			BurgersListAllByFirstLetter
 //	@Produce	json
 //	@Success	200	{object}	[]model.Burger	"Burgers list"
 //	@Failure	500
 //	@Security	none
-//	@Router		/burgers/by-first [get]
+//	@Router		/burgers/by-index [get]
 //	@Param		letter	query		string	false	"First Letter of Burger Name"	example(A)
-func (b burgersHandles) ListAllByFirstLetter(ctx *gin.Context) {
+func (b *burgers) BurgersListAllByFirstLetter(ctx *gin.Context) {
 	letter := ctx.Query("letter")
 	if len(letter) == 0 {
 		resp.Abort400hBadRequest(ctx, "invalid query params")

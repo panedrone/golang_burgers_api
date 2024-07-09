@@ -26,14 +26,14 @@ func (b *burgersDao) Create(ctx context.Context, item *model.Burger) (err error)
 	return
 }
 
-func (b *burgersDao) Read(ctx context.Context, bID int64) (res *model.Burger, err error) {
+func (b *burgersDao) LookupByID(ctx context.Context, bID int64) (res *model.Burger, err error) {
 	err = b.db.WithContext(ctx).Model(&model.Burger{}).
 		Preload(model.BurgerIngredients).
 		Where("id = ?", bID).First(&res).Error
 	return
 }
 
-func (b *burgersDao) FindByName(ctx context.Context, cName string) (res []*model.Burger, err error) {
+func (b *burgersDao) SearchByName(ctx context.Context, cName string) (res []*model.Burger, err error) {
 	key := fmt.Sprintf("%%%s%%", strings.ToLower(cName))
 	err = b.db.WithContext(ctx).Model(&model.Burger{}).
 		Preload(model.BurgerIngredients).
@@ -41,7 +41,7 @@ func (b *burgersDao) FindByName(ctx context.Context, cName string) (res []*model
 	return
 }
 
-func (b *burgersDao) FindByIngredient(ctx context.Context, cIngredientName string) (res []*model.Burger, err error) {
+func (b *burgersDao) SearchByIngredient(ctx context.Context, cIngredientName string) (res []*model.Burger, err error) {
 	key := fmt.Sprintf("%%%s%%", strings.ToLower(cIngredientName))
 	subQuery := b.db.Model(&model.Ingredient{}).Select("DISTINCT(burger_ingredients.burger_id)").Joins("inner join burger_ingredients ON id = burger_ingredients.ingredient_id").
 		Where("LOWER(ingredient_name) LIKE ?", key)

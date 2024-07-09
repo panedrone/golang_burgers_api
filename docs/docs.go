@@ -28,7 +28,7 @@ var SwaggerInfo = &swag.Spec{
 	Version:          "0.0.1",
 	Host:             "127.0.0.1:8080",
 	BasePath:         "/api",
-	Schemes:          []string{"http"},
+	Schemes:          []string{"test_http"},
 	Title:            "Burgers API",
 	Description:      "",
 	InfoInstanceName: "swagger",

@@ -20,8 +20,12 @@ func (d *ingredientsDao) FindByName(ctx context.Context, name string) (res *mode
 	return
 }
 
-func (d *ingredientsDao) Read(ctx context.Context, iID int64) (res *model.Ingredient, err error) {
+func (d *ingredientsDao) LookupIngredientByID(ctx context.Context, iID int64) (res *model.Ingredient, err error) {
 	err = d.db.WithContext(ctx).Model(&model.Ingredient{}).
 		Where("id = ?", iID).First(&res).Error
+	//if errors.Is(err, gorm.ErrRecordNotFound) {
+	//	err = nil
+	//	return
+	//}
 	return
 }

@@ -1,44 +1,17 @@
 package dbal
 
 import (
+	"app/internal/dbal"
 	"app/internal/dbal/dao"
 	"app/internal/model"
 	"app/internal/shared"
 	"context"
-	"os"
-	"path"
-	"runtime"
 	"testing"
 )
 
-var ctx context.Context
-
-func TestMain(m *testing.M) {
-	{
-		_, filename, _, _ := runtime.Caller(0)
-		dir := path.Join(path.Dir(filename), "../..")
-		err := os.Chdir(dir)
-		if err != nil {
-			panic(err)
-		}
-	}
-
-	err := OpenDb()
-	if err != nil {
-		panic(err.Error())
-	}
-	defer func() {
-		_ = CloseDb()
-	}()
-	ctx = context.Background()
-	code := m.Run()
-	// .................... clean up
-	os.Exit(code)
-}
-
-func Test_FindByName(t *testing.T) {
-	bDao := NewBurgersDao()
-	res, err := bDao.FindByName(ctx, "barbiE")
+func Test_Burgers_SearchByName(t *testing.T) {
+	bDao := dbal.NewBurgersDao()
+	res, err := bDao.SearchByName(ctx, "barbiE")
 	if err != nil {
 		t.Fatalf("Error: %s", err)
 		return
@@ -48,9 +21,9 @@ func Test_FindByName(t *testing.T) {
 	}
 }
 
-func Test_FindByIngredient(t *testing.T) {
-	bDao := NewBurgersDao()
-	res, err := bDao.FindByIngredient(ctx, "Tomato")
+func Test_Burgers_SearchByIngredient(t *testing.T) {
+	bDao := dbal.NewBurgersDao()
+	res, err := bDao.SearchByIngredient(ctx, "Tomato")
 	if err != nil {
 		t.Fatalf("Error: %s", err)
 		return
@@ -60,9 +33,9 @@ func Test_FindByIngredient(t *testing.T) {
 	}
 }
 
-func Test_Read(t *testing.T) {
-	bDao := NewBurgersDao()
-	res, err := bDao.Read(ctx, 1)
+func Test_Burgers_LookupByID(t *testing.T) {
+	bDao := dbal.NewBurgersDao()
+	res, err := bDao.LookupByID(ctx, 1)
 	if err != nil {
 		t.Fatalf("Error: %s", err)
 		return
@@ -70,9 +43,9 @@ func Test_Read(t *testing.T) {
 	shared.PrintLnCyan(res)
 }
 
-func Test_Create(t *testing.T) {
+func Test_Burgers_Create(t *testing.T) {
 
-	tx := Db().Begin()
+	tx := dbal.Db().Begin()
 
 	defer func() {
 		tx.Rollback()
@@ -102,7 +75,7 @@ func Test_Create(t *testing.T) {
 		return
 	}
 
-	res, err := bDao.Read(ctx, dbBurger.ID)
+	res, err := bDao.LookupByID(ctx, dbBurger.ID)
 	if err != nil {
 		t.Fatalf("Error: %s", err)
 		return
@@ -110,8 +83,8 @@ func Test_Create(t *testing.T) {
 	shared.PrintLnCyan(res)
 }
 
-func Test_FindRandom(t *testing.T) {
-	bDao := NewBurgersDao()
+func Test_Burgers_FindRandom(t *testing.T) {
+	bDao := dbal.NewBurgersDao()
 	res, err := bDao.FindRandom(ctx)
 	if err != nil {
 		t.Fatalf("Error: %s", err)
@@ -120,8 +93,8 @@ func Test_FindRandom(t *testing.T) {
 	shared.PrintLnCyan(res)
 }
 
-func Test_ListAllByFirstLetter(t *testing.T) {
-	bDao := NewBurgersDao()
+func Test_Burgers_ListAllByFirstLetter(t *testing.T) {
+	bDao := dbal.NewBurgersDao()
 	res, err := bDao.ListAllByFirstLetter(ctx, '2')
 	if err != nil {
 		t.Fatalf("Error: %s", err)
@@ -132,8 +105,8 @@ func Test_ListAllByFirstLetter(t *testing.T) {
 	}
 }
 
-func Test_ListAllStartingLetters(t *testing.T) {
-	bDao := NewBurgersDao()
+func Test_Burgers_ListAllStartingLetters(t *testing.T) {
+	bDao := dbal.NewBurgersDao()
 	res, err := bDao.ListAllStartingLetters(ctx)
 	if err != nil {
 		t.Fatalf("Error: %s", err)
