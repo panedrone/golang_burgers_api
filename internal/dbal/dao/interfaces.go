@@ -17,3 +17,8 @@ type BurgersDao interface {
 	ListAllStartingLetters(ctx context.Context) (res []string, err error)
 	ListAllByFirstLetter(ctx context.Context, letter rune) (res []*model.Burger, err error)
 }
+
+type IngredientsDao interface {
+	FindByName(ctx context.Context, cName string) (res *model.Ingredient, err error)
+	Read(ctx context.Context, iID int64) (*model.Ingredient, error)
+}
