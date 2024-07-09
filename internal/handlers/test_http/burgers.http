@@ -4,15 +4,15 @@ GET http://localhost:8080/api/burgers/search?name=2
 
 ### Search Burgers by ingredient Name
 
-GET http://localhost:8080/api/burgers/search/by-ingredient?name=jal
+GET http://localhost:8080/api/burgers/search/ingredient?name=creo
 
 ### List All starting Letters of Burger Names
 
-GET http://localhost:8080/api/burgers/indexes
+GET http://localhost:8080/api/burgers/search/first-letters
 
 ### List all Burgers by first letter
 
-GET http://localhost:8080/api/burgers/by-index?letter=t
+GET http://localhost:8080/api/burgers/search/first-letter?letter=t
 
 ### Lookup full BURGER details by id
 

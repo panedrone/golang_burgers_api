@@ -1,14 +1,248 @@
 basePath: /api
 consumes:
 - application/json
+definitions:
+  app_internal_model.Burger:
+    properties:
+      description:
+        type: string
+      id:
+        type: integer
+      image_url:
+        description: nullable
+        type: string
+      ingredients:
+        items:
+          $ref: '#/definitions/app_internal_model.Ingredient'
+        type: array
+      name:
+        type: string
+    type: object
+  app_internal_model.Ingredient:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
 host: 127.0.0.1:8080
 info:
   contact: {}
   title: Burgers API
   version: 0.0.1
-paths: {}
+paths:
+  /burgers:
+    post:
+      consumes:
+      - application/json
+      operationId: BurgerCreate
+      parameters:
+      - description: Burger data
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/app_internal_model.Burger'
+      responses:
+        "201":
+          description: Created
+        "500":
+          description: Internal Server Error
+      security:
+      - none: []
+      summary: Create Burger
+      tags:
+      - Burgers
+  /burgers/{burger_id}:
+    get:
+      operationId: BurgerLookupByID
+      parameters:
+      - description: Burger ID
+        in: path
+        name: burger_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Burger data
+          schema:
+            $ref: '#/definitions/app_internal_model.Burger'
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - none: []
+      summary: Lookup full Burger details by id
+      tags:
+      - Burgers
+  /burgers/{ingredient_Id}:
+    get:
+      operationId: IngredientLookupByID
+      parameters:
+      - description: Ingredient ID
+        in: path
+        name: ingredient_Id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Ingredient data
+          schema:
+            $ref: '#/definitions/app_internal_model.Ingredient'
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      security:
+      - none: []
+      summary: Lookup full Ingredient details by id
+      tags:
+      - Ingredients
+  /burgers/random:
+    get:
+      operationId: BurgerFindRandom
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Burger
+          schema:
+            $ref: '#/definitions/app_internal_model.Burger'
+        "500":
+          description: Internal Server Error
+      security:
+      - none: []
+      summary: Lookup a random Burger
+      tags:
+      - Burgers
+  /burgers/search:
+    get:
+      operationId: BurgersSearchByName
+      parameters:
+      - description: Name Key
+        example: abc
+        in: query
+        name: name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Burgers list
+          schema:
+            items:
+              $ref: '#/definitions/app_internal_model.Burger'
+            type: array
+        "500":
+          description: Internal Server Error
+      security:
+      - none: []
+      summary: Search Burgers by Name
+      tags:
+      - Burgers
+  /burgers/search/first-letter:
+    get:
+      operationId: BurgersListAllByFirstLetter
+      parameters:
+      - description: First Letter of Burger Name
+        example: A
+        in: query
+        name: letter
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Burgers list
+          schema:
+            items:
+              $ref: '#/definitions/app_internal_model.Burger'
+            type: array
+        "500":
+          description: Internal Server Error
+      security:
+      - none: []
+      summary: List All Burgers By First Letter
+      tags:
+      - Burgers
+  /burgers/search/first-letters:
+    get:
+      operationId: BurgersListAllStartingLetters
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Letter list
+          schema:
+            items:
+              type: string
+            type: array
+        "500":
+          description: Internal Server Error
+      security:
+      - none: []
+      summary: List All starting Letters of Burger Names
+      tags:
+      - Burgers
+  /burgers/search/ingredient:
+    get:
+      operationId: BurgersSearchByIngredient
+      parameters:
+      - description: Ingredient Name Key
+        example: abc
+        in: query
+        name: name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Burgers list
+          schema:
+            items:
+              $ref: '#/definitions/app_internal_model.Burger'
+            type: array
+        "500":
+          description: Internal Server Error
+      security:
+      - none: []
+      summary: Search Burgers by FindByIngredient Name
+      tags:
+      - Burgers
+  /ingredients/search:
+    get:
+      operationId: IngredientSearchByName
+      parameters:
+      - description: Name Key
+        example: abc
+        in: query
+        name: name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Ingredient
+          schema:
+            $ref: '#/definitions/app_internal_model.Ingredient'
+        "500":
+          description: Internal Server Error
+      security:
+      - none: []
+      summary: Search Ingredient by Name
+      tags:
+      - Ingredients
 produces:
 - application/json
 schemes:
-- http
+- test_http
 swagger: "2.0"

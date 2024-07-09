@@ -58,9 +58,9 @@ func setupHandlers(myRouter *gin.Engine) {
 		groupBurgers.POST("/", handleBurgers.BurgerCreate)
 		groupBurgers.GET("/:burger_id", handleBurgers.BurgerLookupByID)
 		groupBurgers.GET("/search", handleBurgers.BurgersSearchByName)
-		groupBurgers.GET("/search/by-ingredient", handleBurgers.BurgersSearchByIngredient)
-		groupBurgers.GET("/indexes", handleBurgers.BurgersListAllStartingLetters)
-		groupBurgers.GET("/by-index", handleBurgers.BurgersListAllByFirstLetter)
+		groupBurgers.GET("/search/ingredient", handleBurgers.BurgersSearchByIngredient)
+		groupBurgers.GET("/search/first-letters", handleBurgers.BurgersListAllStartingLetters)
+		groupBurgers.GET("/search/first-letter", handleBurgers.BurgersListAllByFirstLetter)
 		groupBurgers.GET("/random", handleBurgers.BurgerFindRandom)
 	}
 	{

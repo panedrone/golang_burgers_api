@@ -54,7 +54,7 @@ func (b *burgers) BurgersSearchByName(ctx *gin.Context) {
 //	@Success	200	{object}	[]model.Burger	"Burgers list"
 //	@Failure	500
 //	@Security	none
-//	@Router		/burgers/search/by-ingredient [get]
+//	@Router		/burgers/search/ingredient [get]
 //	@Param		name	query		string	false	"Ingredient Name Key"	example(abc)
 func (b *burgers) BurgersSearchByIngredient(ctx *gin.Context) {
 	name := ctx.Query("name")
@@ -144,7 +144,7 @@ func (b *burgers) BurgerFindRandom(ctx *gin.Context) {
 //	@Success	200	{object}	[]string	"Letter list"
 //	@Failure	500
 //	@Security	none
-//	@Router		/burgers/indexes [get]
+//	@Router		/burgers/search/first-letters [get]
 func (b *burgers) BurgersListAllStartingLetters(ctx *gin.Context) {
 	res, err := b.bDao.ListAllStartingLetters(ctx)
 	if err != nil {
@@ -163,7 +163,7 @@ func (b *burgers) BurgersListAllStartingLetters(ctx *gin.Context) {
 //	@Success	200	{object}	[]model.Burger	"Burgers list"
 //	@Failure	500
 //	@Security	none
-//	@Router		/burgers/by-index [get]
+//	@Router		/burgers/search/first-letter [get]
 //	@Param		letter	query		string	false	"First Letter of Burger Name"	example(A)
 func (b *burgers) BurgersListAllByFirstLetter(ctx *gin.Context) {
 	letter := ctx.Query("letter")

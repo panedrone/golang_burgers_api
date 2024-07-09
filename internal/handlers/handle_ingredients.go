@@ -5,6 +5,7 @@ import (
 	"app/internal/dbal/dao"
 	"app/internal/handlers/request"
 	"app/internal/handlers/resp"
+	"app/internal/model"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -37,6 +38,7 @@ func (i *ingredients) IngredientSearchByName(ctx *gin.Context) {
 		return
 	}
 	d := dbal.NewIngredientsDao()
+	var res *model.Ingredient // === panedrone: for "swag init"
 	res, err := d.FindByName(ctx, name)
 	if err != nil {
 		resp.Abort500(ctx, err)
@@ -65,7 +67,8 @@ func (i *ingredients) IngredientLookupByID(ctx *gin.Context) {
 		return
 	}
 	d := dbal.NewIngredientsDao()
-	res, err := d.LookupIngredientByID(ctx, uri.IngredientId)
+	var res *model.Ingredient // === panedrone: for "swag init"
+	res, err = d.LookupIngredientByID(ctx, uri.IngredientId)
 	if err != nil {
 		resp.Abort500(ctx, err)
 		return

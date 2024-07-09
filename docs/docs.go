@@ -20,7 +20,383 @@ const docTemplate = `{
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
-    "paths": {}
+    "paths": {
+        "/burgers": {
+            "post": {
+                "security": [
+                    {
+                        "none": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Burgers"
+                ],
+                "summary": "Create Burger",
+                "operationId": "BurgerCreate",
+                "parameters": [
+                    {
+                        "description": "Burger data",
+                        "name": "json",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/app_internal_model.Burger"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/burgers/random": {
+            "get": {
+                "security": [
+                    {
+                        "none": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Burgers"
+                ],
+                "summary": "Lookup a random Burger",
+                "operationId": "BurgerFindRandom",
+                "responses": {
+                    "200": {
+                        "description": "Burger",
+                        "schema": {
+                            "$ref": "#/definitions/app_internal_model.Burger"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/burgers/search": {
+            "get": {
+                "security": [
+                    {
+                        "none": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Burgers"
+                ],
+                "summary": "Search Burgers by Name",
+                "operationId": "BurgersSearchByName",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "example": "abc",
+                        "description": "Name Key",
+                        "name": "name",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Burgers list",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/app_internal_model.Burger"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/burgers/search/first-letter": {
+            "get": {
+                "security": [
+                    {
+                        "none": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Burgers"
+                ],
+                "summary": "List All Burgers By First Letter",
+                "operationId": "BurgersListAllByFirstLetter",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "example": "A",
+                        "description": "First Letter of Burger Name",
+                        "name": "letter",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Burgers list",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/app_internal_model.Burger"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/burgers/search/first-letters": {
+            "get": {
+                "security": [
+                    {
+                        "none": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Burgers"
+                ],
+                "summary": "List All starting Letters of Burger Names",
+                "operationId": "BurgersListAllStartingLetters",
+                "responses": {
+                    "200": {
+                        "description": "Letter list",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/burgers/search/ingredient": {
+            "get": {
+                "security": [
+                    {
+                        "none": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Burgers"
+                ],
+                "summary": "Search Burgers by FindByIngredient Name",
+                "operationId": "BurgersSearchByIngredient",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "example": "abc",
+                        "description": "Ingredient Name Key",
+                        "name": "name",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Burgers list",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/app_internal_model.Burger"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/burgers/{burger_id}": {
+            "get": {
+                "security": [
+                    {
+                        "none": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Burgers"
+                ],
+                "summary": "Lookup full Burger details by id",
+                "operationId": "BurgerLookupByID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Burger ID",
+                        "name": "burger_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Burger data",
+                        "schema": {
+                            "$ref": "#/definitions/app_internal_model.Burger"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/burgers/{ingredient_Id}": {
+            "get": {
+                "security": [
+                    {
+                        "none": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Ingredients"
+                ],
+                "summary": "Lookup full Ingredient details by id",
+                "operationId": "IngredientLookupByID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Ingredient ID",
+                        "name": "ingredient_Id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ingredient data",
+                        "schema": {
+                            "$ref": "#/definitions/app_internal_model.Ingredient"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/ingredients/search": {
+            "get": {
+                "security": [
+                    {
+                        "none": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Ingredients"
+                ],
+                "summary": "Search Ingredient by Name",
+                "operationId": "IngredientSearchByName",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "example": "abc",
+                        "description": "Name Key",
+                        "name": "name",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ingredient",
+                        "schema": {
+                            "$ref": "#/definitions/app_internal_model.Ingredient"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "app_internal_model.Burger": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "image_url": {
+                    "description": "nullable",
+                    "type": "string"
+                },
+                "ingredients": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/app_internal_model.Ingredient"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "app_internal_model.Ingredient": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        }
+    }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
