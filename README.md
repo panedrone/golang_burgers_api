@@ -1,6 +1,6 @@
 # Burgers API
 
-## Project Requirements
+### Project Requirements
 
 Create API (backend code + db):
 
@@ -15,7 +15,7 @@ Create API (backend code + db):
 
 Once deployed, refer to http://{host}/swagger/index.html for details.
 
-## Steps to build and run the Back-End
+### Steps to build and run the Back-End
 
 Build and Run on Windows x64
 
@@ -39,7 +39,7 @@ cd ./../bin/cli && ./burgers-api
 
 Stop the app with ^C.
 
-## Dockerized app
+### Dockerized app
 
 Run the App
 
@@ -53,7 +53,7 @@ Stop the App
 docker-compose -f ./docker-compose.yml down
 ```
 
-## Generate Open API Docs
+### Generate Open API Docs
 
 Windows:
 
@@ -68,7 +68,7 @@ Linux:
 ~/go/bin/swag fmt -g cmd/main/main.go 
 ```
 
-## Steps to build the Front-End
+### Steps to build the Front-End
 
 ```shell
 cd ./front-end/
