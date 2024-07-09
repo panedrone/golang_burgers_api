@@ -8,7 +8,7 @@ GET http://localhost:8080/api/burgers/index
 
 ### List all Burgers by first letter
 
-GET http://localhost:8080/api/burgers/by-first?letter=a
+GET http://localhost:8080/api/burgers/by-first?letter=t
 
 ### Lookup full BURGER details by id
 
@@ -18,7 +18,34 @@ GET http://localhost:8080/api/burgers/1
 
 GET http://localhost:8080/api/burgers/random
 
+### Create Burger
+
+POST http://localhost:8080/api/burgers
+Content-Type: application/json
+
+{
+  "name": "Test Burger 1",
+  "description": "Tasty Test Burger 1.",
+  "image_url": null,
+  "ingredients": [
+    {
+      "id": 7,
+      "name": "lettuce"
+    },
+    {
+      "id": 15,
+      "name": "pickles"
+    },
+    {
+      "id": 18,
+      "name": "tomato"
+    }
+  ]
+}
+
 ###
+
+
 
 
 

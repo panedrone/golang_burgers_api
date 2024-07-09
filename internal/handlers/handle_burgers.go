@@ -5,6 +5,7 @@ import (
 	"app/internal/dbal/dao"
 	"app/internal/handlers/request"
 	"app/internal/handlers/resp"
+	"app/internal/model"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -57,8 +58,15 @@ func (b burgersHandles) FindByIngredient(ctx *gin.Context) {
 //	@Router		/burgers [post]
 //	@Param		json	body	model.Burger	true	"Burger data"
 func (b burgersHandles) Create(ctx *gin.Context) {
-	//TODO implement me
-	panic("implement me")
+	var req model.Burger
+	if err := request.BindJSON(ctx, &req); err != nil {
+		return
+	}
+	err := b.bDao.Create(ctx, &req)
+	if err != nil {
+		resp.Abort500(ctx, err)
+		return
+	}
 }
 
 // Read
