@@ -13,7 +13,7 @@
 
 Refer to http://{host}/swagger/index.html for details.
 
-### API Demo in React.js
+### Demo SPA in React.js
 
 ![burgers-api-demo.png](burgers-api-demo.png)
 
