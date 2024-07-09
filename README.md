@@ -1,6 +1,6 @@
-## Burgers API
+# Burgers API
 
-(Test assessment for a Golang Developer Position)
+## Project Requirements
 
 Create API (backend code + db):
 
