@@ -1,5 +1,5 @@
 {
-  "name": "golang_assessment_spy_cat_agency",
+  "name": "golang_burgers_api_react_16_sqlite3",
   "version": "1.0.0",
   "scripts": {
     "prod": "webpack --mode production",

@@ -46,17 +46,17 @@ export const Main = () => {
             {
                 viewMode === ViewMode.ABC
                     ?
-                    <spa>===ABC===</spa>
+                    <span>===ABC===</span>
                     :
                     viewMode === ViewMode.SEARCH_BY_NAME
                         ?
-                        <spa>===SEARCH_BY_NAME===</spa>
+                        <span>===SEARCH_BY_NAME===</span>
                         :
                         viewMode === ViewMode.SEARCH_BY_INGREDIENT
                             ?
-                            <spa>===SEARCH_BY_INGREDIENT===</spa>
+                            <span>===SEARCH_BY_INGREDIENT===</span>
                             :
-                            <spa>===???===</spa>
+                            <span>===???===</span>
             }
         </div>
     </div>

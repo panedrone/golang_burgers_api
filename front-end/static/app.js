@@ -3,6 +3,7 @@ import React from "react";
 import * as shared from "./components/shared";
 import fire from './components/event_bus'
 import {ErrorArea} from "./components/error_area";
+import {Main} from "./components/form_main";
 
 function _assignServerErrorUpdater(updater) {
     fire.showServerError = updater
@@ -11,7 +12,7 @@ function _assignServerErrorUpdater(updater) {
 const App = () => {
 
     React.useEffect(() => {
-        windowOnLoad();
+        //
     });
 
     return <table className="bg">
@@ -33,30 +34,17 @@ const App = () => {
                                         <td className="w1 nowrap v-middle">
                                             <div className="card">
                                                 <a target="_blank"
-                                                   href="https://github.com/panedrone/golang_assessment_spy_cat_agency">GitHub
-                                                    Repository</a>
+                                                   href="https://github.com/panedrone/golang_burgers_api">GitHub Repo</a>
                                             </div>
                                         </td>
                                         <td className="w1 nowrap v-middle">
                                             <div className="card">
-                                                <a target="_blank" href="swagger/index.html">API Docs</a>
+                                                <a target="_blank" href="swagger/index.html">Open API Docs</a>
                                             </div>
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
-                            </td>
-                            <td className="w1 v-middle">
-                                <div className="card">
-                                    {
-                                        viewMode === ViewMode.LOGIN ?
-                                            <span>Welcome!</span>
-                                            :
-                                            <a onClick={() => setViewMode(ViewMode.LOGIN)} href="#">
-                                                Logout
-                                            </a>
-                                    }
-                                </div>
                             </td>
                         </tr>
                         </tbody>
@@ -74,17 +62,7 @@ const App = () => {
         <tr>
             <td>
                 <div>
-                    {
-                        viewMode === ViewMode.LOGIN
-                            ?
-                            <LoginForm/>
-                            :
-                            viewMode === ViewMode.AGENCY
-                                ?
-                                <Agency/>
-                                :
-                                <SpyCat initialSpyCat={_currentSpyCat}/>
-                    }
+                    <Main/>
                 </div>
             </td>
         </tr>
@@ -94,8 +72,8 @@ const App = () => {
 
 shared.render(<App/>, "app")
 
-function windowOnLoad() {
-    whoiam.fetchWhoIAm()
-}
+// function windowOnLoad() {
+//     whoiam.fetchWhoIAm()
+// }
 
 // windowOnLoad().then(() => console.log('== windowOnLoad() completed =='))

@@ -15,7 +15,7 @@ Create API (backend code + db):
 
 Once deployed, refer to http://{host}/swagger/index.html for details.
 
-## Steps to build and run Back-End
+## Steps to build and run the Back-End
 
 Build and Run on Windows x64
 
@@ -68,7 +68,7 @@ Linux:
 ~/go/bin/swag fmt -g cmd/main/main.go 
 ```
 
-## Steps to build Front-End
+## Steps to build the Front-End
 
 ```shell
 cd ./front-end/
