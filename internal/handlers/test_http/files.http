@@ -6,9 +6,9 @@ POST http://localhost:8080/api/files
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 
 --WebAppBoundary
-Content-Disposition: form-data; name="file"; filename="Tribute.jpg"
+Content-Disposition: form-data; name="file"; filename="Pulled Mooshie.jpg"
 
-< D:\burgers\Tribute.jpg
+< D:\burgers\Pulled Mooshie.jpg
 --WebAppBoundary--
 
 ###

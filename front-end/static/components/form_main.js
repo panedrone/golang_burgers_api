@@ -1,15 +1,17 @@
 import * as React from "react";
+import {RandomBurger} from "./form_random_burger";
 
 const ViewMode = Object.freeze({
-    ABC: 1,
-    SEARCH_BY_NAME: 2,
-    SEARCH_BY_INGREDIENT: 3,
-    MISSIONS_COMPLETED: 4,
+    RANDOM: 1,
+    ABC: 2,
+    SEARCH_BY_NAME: 3,
+    SEARCH_BY_INGREDIENT: 4,
+    MISSIONS_ALL_INGREDIENTS: 5,
 });
 
 export const Main = () => {
 
-    const [viewMode, setViewMode] = React.useState(ViewMode.ABC);
+    const [viewMode, setViewMode] = React.useState(ViewMode.RANDOM);
 
     return <div>
         <table className="bg">
@@ -17,22 +19,27 @@ export const Main = () => {
             <tr>
                 <td className="w1 nowrap v-middle">
                     <div className="card">
+                        <a onClick={() => setViewMode(ViewMode.RANDOM)}>Random Burger</a>
+                    </div>
+                </td>
+                <td className="w1 nowrap v-middle">
+                    <div className="card">
                         <a onClick={() => setViewMode(ViewMode.ABC)}>ABC</a>
                     </div>
                 </td>
                 <td className="w1 nowrap v-middle">
                     <div className="card">
-                        <a onClick={() => setViewMode(ViewMode.SEARCH_BY_NAME)}>SEARCH BY NAME</a>
+                        <a onClick={() => setViewMode(ViewMode.SEARCH_BY_NAME)}>Search by Burger Name</a>
                     </div>
                 </td>
                 <td className="w1 nowrap v-middle">
                     <div className="card">
-                        <a onClick={() => setViewMode(ViewMode.SEARCH_BY_INGREDIENT)}>SEARCH BY INGREDIENT</a>
+                        <a onClick={() => setViewMode(ViewMode.SEARCH_BY_INGREDIENT)}>Search by Ingredient</a>
                     </div>
                 </td>
                 <td className="w1 nowrap v-middle">
                     <div className="card">
-                        <a onClick={() => setViewMode(ViewMode.MISSIONS_COMPLETED)}>Completed Missions</a>
+                        <a onClick={() => setViewMode(ViewMode.MISSIONS_ALL_INGREDIENTS)}>Ingredients</a>
                     </div>
                 </td>
                 <td>
@@ -42,21 +49,25 @@ export const Main = () => {
         </table>
         <p>
         </p>
-        <div>
+        <div className={"card"}>
             {
-                viewMode === ViewMode.ABC
+                viewMode === ViewMode.RANDOM
                     ?
-                    <span>===ABC===</span>
+                    <RandomBurger/>
                     :
-                    viewMode === ViewMode.SEARCH_BY_NAME
+                    viewMode === ViewMode.ABC
                         ?
-                        <span>===SEARCH_BY_NAME===</span>
+                        <span>===ABC===</span>
                         :
-                        viewMode === ViewMode.SEARCH_BY_INGREDIENT
+                        viewMode === ViewMode.SEARCH_BY_NAME
                             ?
-                            <span>===SEARCH_BY_INGREDIENT===</span>
+                            <span>===SEARCH_BY_NAME===</span>
                             :
-                            <span>===???===</span>
+                            viewMode === ViewMode.SEARCH_BY_INGREDIENT
+                                ?
+                                <span>===SEARCH_BY_INGREDIENT===</span>
+                                :
+                                <span>===???===</span>
             }
         </div>
     </div>
