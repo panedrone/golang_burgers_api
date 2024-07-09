@@ -144,9 +144,8 @@ Content-Type: application/json
     }
   ]
 }
-
-###
 ```
+
 ```http request
 ### Search ingredient by Name
 
@@ -155,6 +154,20 @@ GET http://localhost:8080/api/ingredients/search?name=beef
 ### Lookup full ingredient details by id
 
 GET http://localhost:8080/api/ingredients/1
+```
+
+```http request
+# curl -X POST http://localhost:8080/upload
+#  -F "file=@/Users/appleboy/test.zip"
+#  -H "Content-Type: multipart/form-data"
+POST http://localhost:8080/api/files
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="Tribute.jpg"
+
+< D:\burgers\Tribute.jpg
+--WebAppBoundary--
 ```
 
 ### Steps to build the Front-End

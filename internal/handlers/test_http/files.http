@@ -1,0 +1,15 @@
+
+# curl -X POST http://localhost:8080/upload
+#  -F "file=@/Users/appleboy/test.zip"
+#  -H "Content-Type: multipart/form-data"
+POST http://localhost:8080/api/files
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="Tribute.jpg"
+
+< D:\burgers\Tribute.jpg
+--WebAppBoundary--
+
+###
+

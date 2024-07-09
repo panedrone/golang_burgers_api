@@ -69,4 +69,8 @@ func setupHandlers(myRouter *gin.Engine) {
 		groupIngredients.GET("/search", handleIngredients.IngredientSearchByName)
 		groupIngredients.GET("/:ingredient_id", handleIngredients.IngredientLookupByID)
 	}
+	{
+		groupFiles := groupApi.Group("/files")
+		groupFiles.POST("/", handlers.PostFile)
+	}
 }
