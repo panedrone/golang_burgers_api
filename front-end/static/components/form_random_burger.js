@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 
 import * as api from "./api"
+import fire from "./event_bus";
 
 let _burger = {
     "id": 19,
@@ -30,26 +31,26 @@ let _burger = {
 _burger = null
 
 const IngredientList = ({initial}) => {
-    return <p>
+    return <>
         {
             initial === null
                 ?
                 ""
                 :
-                <o>
+                <ul>
                     {
                         initial.map((ingredient, index) => {
                                 return (
                                     <li key={index} className="nowrap">
-                                        {ingredient.name}
+                                        <a href="#" onClick={() => fire.activateSearchByIngredient(ingredient.name)}>{ingredient.name}</a>
                                     </li>
                                 )
                             }
                         )
                     }
-                </o>
+                </ul>
         }
-    </p>
+    </>
 }
 
 export const RandomBurger = () => {
@@ -99,13 +100,13 @@ export const RandomBurger = () => {
                         </table>
                     </div>
                     <div>
-                        <table className={"bg"}>
+                        <table>
                             <tbody>
                             <tr>
                                 <td>
                                     {
                                         burgerData.image_url === null ? "" :
-                                            <img src={burgerData.image_url} style={{width: "620px", height: "auto"}}/>
+                                            <img src={burgerData.image_url} style={{width: "660px", height: "auto"}}/>
                                     }
                                 </td>
                                 <td>

@@ -24,7 +24,7 @@ const App = () => {
                         <tbody>
                         <tr>
                             <td className="v-middle">
-                                <h2 id="whoiam">Burgers API Demo. React.js {React.version}</h2>
+                                <h2 id="whoiam">Burgers API Demo</h2>
                             </td>
                             <td className="w1 v-middle">
 

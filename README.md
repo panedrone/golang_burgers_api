@@ -13,6 +13,10 @@
 
 Refer to http://{host}/swagger/index.html for details.
 
+### API Demo in React.js
+
+![burgers-api-demo.png](burgers-api-demo.png)
+
 ### ERD
 
 ![burgers-api-erd.png](burgers-api-erd.png)
