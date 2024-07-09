@@ -25,5 +25,6 @@ func Setup(myRouter *gin.Engine) {
 		burgersList.GET("/:burger_id", burgersHandles.Read)
 		burgersList.GET("/search", burgersHandles.FindByName)
 		burgersList.GET("/index", burgersHandles.ListAllStartingLetters)
+		burgersList.GET("/by-first", burgersHandles.ListAllByFirstLetter)
 	}
 }

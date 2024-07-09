@@ -6,4 +6,9 @@ GET http://localhost:8080/api/burgers/search?name=2
 
 GET http://localhost:8080/api/burgers/index
 
+### GET List all Burgers by first letter
+
+GET http://localhost:8080/api/burgers/by-first?letter=a
+
 ###
+

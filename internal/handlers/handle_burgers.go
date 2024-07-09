@@ -98,11 +98,21 @@ func (b burgersHandles) ListAllStartingLetters(ctx *gin.Context) {
 //	@Success	200	{object}	[]model.Burger	"Burgers list"
 //	@Failure	500
 //	@Security	none
-//	@Router		/burgers/by-letter [get]
-//	@Param		letter	query		string	false	"Firs Letter of Burger Name"	example(A)
+//	@Router		/burgers/by-first [get]
+//	@Param		letter	query		string	false	"First Letter of Burger Name"	example(A)
 func (b burgersHandles) ListAllByFirstLetter(ctx *gin.Context) {
-	//TODO implement me
-	panic("implement me")
+	letter := ctx.Query("letter")
+	if len(letter) == 0 {
+		resp.Abort400hBadRequest(ctx, "invalid query params")
+		return
+	}
+	r := []rune(letter)[0]
+	res, err := b.bDao.ListAllByFirstLetter(ctx, r)
+	if err != nil {
+		resp.Abort500(ctx, err)
+		return
+	}
+	resp.JSON(ctx, http.StatusOK, res)
 }
 
 //// ReadAllByMission
