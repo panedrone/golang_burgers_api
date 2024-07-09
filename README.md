@@ -92,6 +92,71 @@ Linux:
 ~/go/bin/swag fmt -g cmd/main/main.go 
 ```
 
+### HTTP Testing
+
+```http request
+
+### Search Burgers by Name
+
+GET http://localhost:8080/api/burgers/search?name=2
+
+### Search Burgers by ingredient Name
+
+GET http://localhost:8080/api/burgers/search/ingredient?name=creo
+
+### List All starting Letters of Burger Names
+
+GET http://localhost:8080/api/burgers/search/first-letters
+
+### List all Burgers by first letter
+
+GET http://localhost:8080/api/burgers/search/first-letter?letter=t
+
+### Lookup full BURGER details by id
+
+GET http://localhost:8080/api/burgers/1
+
+### Lookup a random Burger
+
+GET http://localhost:8080/api/burgers/random
+
+### Create Burger
+
+POST http://localhost:8080/api/burgers
+Content-Type: application/json
+
+{
+  "name": "Test Burger 1",
+  "description": "Tasty Test Burger 1.",
+  "image_url": null,
+  "ingredients": [
+    {
+      "id": 7,
+      "name": "lettuce"
+    },
+    {
+      "id": 15,
+      "name": "pickles"
+    },
+    {
+      "id": 18,
+      "name": "tomato"
+    }
+  ]
+}
+
+###
+```
+```http request
+### Search ingredient by Name
+
+GET http://localhost:8080/api/ingredients/search?name=beef
+
+### Lookup full ingredient details by id
+
+GET http://localhost:8080/api/ingredients/1
+```
+
 ### Steps to build the Front-End
 
 ```shell
