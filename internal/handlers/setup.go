@@ -24,6 +24,7 @@ func Setup(myRouter *gin.Engine) {
 		burgersList.POST("/", burgersHandles.Create)
 		burgersList.GET("/:burger_id", burgersHandles.Read)
 		burgersList.GET("/search", burgersHandles.FindByName)
+		burgersList.GET("/search/by-ingredient", burgersHandles.FindByIngredient)
 		burgersList.GET("/index", burgersHandles.ListAllStartingLetters)
 		burgersList.GET("/by-first", burgersHandles.ListAllByFirstLetter)
 		burgersList.GET("/random", burgersHandles.FindRandom)

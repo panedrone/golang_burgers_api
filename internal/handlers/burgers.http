@@ -2,6 +2,10 @@
 
 GET http://localhost:8080/api/burgers/search?name=2
 
+### Search Burgers by ingredient Name
+
+GET http://localhost:8080/api/burgers/search/by-ingredient?name=jal
+
 ### List All starting Letters of Burger Names
 
 GET http://localhost:8080/api/burgers/index

@@ -41,9 +41,25 @@ func (b burgersHandles) FindByName(ctx *gin.Context) {
 	resp.JSON(ctx, http.StatusOK, res)
 }
 
+// FindByIngredient
+//
+//	@Summary	Search Burgers by FindByIngredient Name
+//	@Tags		Burgers
+//	@Id			Burgers_FindByIngredient
+//	@Produce	json
+//	@Success	200	{object}	[]model.Burger	"Burgers list"
+//	@Failure	500
+//	@Security	none
+//	@Router		/burgers/search/by-ingredient [get]
+//	@Param		name	query		string	false	"Ingredient Name Key"	example(abc)
 func (b burgersHandles) FindByIngredient(ctx *gin.Context) {
-	//TODO implement me
-	panic("implement me")
+	name := ctx.Query("name")
+	res, err := b.bDao.FindByIngredient(ctx, name)
+	if err != nil {
+		resp.Abort500(ctx, err)
+		return
+	}
+	resp.JSON(ctx, http.StatusOK, res)
 }
 
 // Create
