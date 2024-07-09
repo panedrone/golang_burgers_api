@@ -25,7 +25,7 @@ definitions:
       name:
         type: string
     type: object
-host: 127.0.0.1:8080
+host: localhost:8080
 info:
   contact: {}
   title: Burgers API
@@ -244,5 +244,5 @@ paths:
 produces:
 - application/json
 schemes:
-- test_http
+- http
 swagger: "2.0"

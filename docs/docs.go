@@ -402,9 +402,9 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "0.0.1",
-	Host:             "127.0.0.1:8080",
+	Host:             "localhost:8080",
 	BasePath:         "/api",
-	Schemes:          []string{"test_http"},
+	Schemes:          []string{"http"},
 	Title:            "Burgers API",
 	Description:      "",
 	InfoInstanceName: "swagger",
