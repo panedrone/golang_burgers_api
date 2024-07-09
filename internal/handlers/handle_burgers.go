@@ -88,9 +88,23 @@ func (b burgersHandles) Read(ctx *gin.Context) {
 	resp.JSON(ctx, http.StatusOK, res)
 }
 
+// FindRandom
+//
+//	@Summary	Lookup a random Burger
+//	@Tags		Burgers
+//	@Id			Burgers_FindRandom
+//	@Produce	json
+//	@Success	200	{object}	model.Burger	"Burger"
+//	@Failure	500
+//	@Security	none
+//	@Router		/burgers/random [get]
 func (b burgersHandles) FindRandom(ctx *gin.Context) {
-
-	panic("implement me")
+	res, err := b.bDao.FindRandom(ctx)
+	if err != nil {
+		resp.Abort500(ctx, err)
+		return
+	}
+	resp.JSON(ctx, http.StatusOK, res)
 }
 
 // ListAllStartingLetters
