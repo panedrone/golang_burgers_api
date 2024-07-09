@@ -1,8 +1,6 @@
 # Burgers API
 
-### Project Requirements
-
-Create API (backend code + db):
+### API Methods
 
 * Search Burger by name
 * List all Burgers by first letter
@@ -13,14 +11,40 @@ Create API (backend code + db):
 * Search by ingredient
 * Creating a new Burger.
 
-Once deployed, refer to http://{host}/swagger/index.html for details.
+Refer to http://{host}/swagger/index.html for details.
+
+### ERD
+
+![burgers-api-erd.png](burgers-api-erd.png)
+
+### Auto-Migrate
+
+Build and Run on Windows x64
+
+```shell
+go build -o ./../bin/cli/migrate.exe cmd/migrate/migrate.go
+```
+
+```shell
+cd ./../bin/cli; if ($?) { ./migrate.exe }
+```
+
+Build and Run on Linux
+
+```shell
+env GOOS=linux GOARCH=amd64 && go build -o ./../bin/cli/migrate cmd/migrate/migrate.go
+```
+
+```shell
+cd ./../bin/cli && ./migrate
+```
 
 ### Steps to build and run the Back-End
 
 Build and Run on Windows x64
 
 ```shell
-cd app; if ($?) { go build -o ./../bin/cli/burgers-api.exe cmd/main/main.go}
+go build -o ./../bin/cli/burgers-api.exe cmd/main/main.go
 ```
 
 ```shell
@@ -30,7 +54,7 @@ cd ./../bin/cli; if ($?) { ./burgers-api.exe }
 Build and Run on Linux
 
 ```shell
-cd app/ && env GOOS=linux GOARCH=amd64 && go build -o ./../bin/cli/burgers-api cmd/main/main.go
+env GOOS=linux GOARCH=amd64 && go build -o ./../bin/cli/burgers-api cmd/main/main.go
 ```
 
 ```shell
