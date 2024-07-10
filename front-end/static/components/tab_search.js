@@ -91,6 +91,10 @@ export const TabSearch = () => {
 
     return <div>
 
+        <p>
+            <FirstLetters/>
+        </p>
+
         <table className="w100 edit-form">
             <tbody>
             <tr>
@@ -122,10 +126,6 @@ export const TabSearch = () => {
             </tr>
             </tbody>
         </table>
-
-        <p>
-            <FirstLetters/>
-        </p>
 
         <div ref={ref_logo} style={{
             minHeight: "320px",
