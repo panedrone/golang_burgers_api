@@ -35,8 +35,8 @@ func NewBurgers() Burgers {
 func (b *burgers) BurgersSearch(ctx *gin.Context) {
 	bName := ctx.Query("b")
 	iName := ctx.Query("i")
-	if len(bName) < 2 && len(iName) < 2 {
-		resp.Abort400hBadRequest(ctx, "name is required")
+	if len(bName) < 1 && len(iName) < 1 {
+		resp.Abort400hBadRequest(ctx, "invalid query params")
 		return
 	}
 	res, err := b.bDao.Search(ctx, bName, iName)

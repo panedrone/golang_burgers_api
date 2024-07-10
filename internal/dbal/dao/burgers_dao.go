@@ -34,7 +34,7 @@ func (b *burgersDao) LookupByID(ctx context.Context, bID int64) (res *model.Burg
 }
 
 func (b *burgersDao) Search(ctx context.Context, cName string, cIngredientName string) (res []*model.Burger, err error) {
-	if len(cIngredientName) < 2 && len(cName) < 2 {
+	if len(cIngredientName) < 1 && len(cName) < 1 {
 		return
 	}
 	tx := b.db.WithContext(ctx).Model(&model.Burger{}).Preload(model.BurgerIngredients)

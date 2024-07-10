@@ -99,12 +99,17 @@ paths:
       - Burgers
   /burgers/search:
     get:
-      operationId: BurgersSearchByName
+      operationId: BurgersSearch
       parameters:
-      - description: Name Key
+      - description: Burger Name Key
         example: abc
         in: query
-        name: name
+        name: b
+        type: string
+      - description: Ingredient Name Key
+        example: abc
+        in: query
+        name: i
         type: string
       produces:
       - application/json
@@ -119,7 +124,7 @@ paths:
           description: Internal Server Error
       security:
       - none: []
-      summary: Search Burgers by Name
+      summary: Search Burgers by Name and/or Ingredient
       tags:
       - Burgers
   /burgers/search/first-letter:
@@ -164,31 +169,6 @@ paths:
       security:
       - none: []
       summary: List All starting Letters of Burger Names
-      tags:
-      - Burgers
-  /burgers/search/ingredient:
-    get:
-      operationId: BurgersSearchByIngredient
-      parameters:
-      - description: Ingredient Name Key
-        example: abc
-        in: query
-        name: name
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Burgers list
-          schema:
-            items:
-              $ref: '#/definitions/app_internal_model.Burger'
-            type: array
-        "500":
-          description: Internal Server Error
-      security:
-      - none: []
-      summary: Search Burgers by FindByIngredient Name
       tags:
       - Burgers
   /ingredients:

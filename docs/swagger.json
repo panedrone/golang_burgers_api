@@ -94,14 +94,21 @@
                 "tags": [
                     "Burgers"
                 ],
-                "summary": "Search Burgers by Name",
-                "operationId": "BurgersSearchByName",
+                "summary": "Search Burgers by Name and/or Ingredient",
+                "operationId": "BurgersSearch",
                 "parameters": [
                     {
                         "type": "string",
                         "example": "abc",
-                        "description": "Name Key",
-                        "name": "name",
+                        "description": "Burger Name Key",
+                        "name": "b",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "example": "abc",
+                        "description": "Ingredient Name Key",
+                        "name": "i",
                         "in": "query"
                     }
                 ],
@@ -183,46 +190,6 @@
                             "type": "array",
                             "items": {
                                 "type": "string"
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error"
-                    }
-                }
-            }
-        },
-        "/burgers/search/ingredient": {
-            "get": {
-                "security": [
-                    {
-                        "none": []
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Burgers"
-                ],
-                "summary": "Search Burgers by FindByIngredient Name",
-                "operationId": "BurgersSearchByIngredient",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "example": "abc",
-                        "description": "Ingredient Name Key",
-                        "name": "name",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Burgers list",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/app_internal_model.Burger"
                             }
                         }
                     },

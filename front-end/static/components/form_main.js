@@ -20,7 +20,6 @@ export const Main = () => {
     const ref_abs = React.useRef()
     const ref_search = React.useRef()
     const ref_all_ingredients = React.useRef()
-    const ref_new_burger = React.useRef()
 
     let ref_active = ref_random
 
@@ -46,7 +45,7 @@ export const Main = () => {
             <tr>
                 <td className="w1 nowrap v-middle">
                     <div className="card">
-                        <a onClick={() => show(ref_abs)}>ABC</a>
+                        <a onClick={() => show(ref_random)}>Random Burger</a>
                     </div>
                 </td>
                 <td className="w1 nowrap v-middle">
@@ -56,20 +55,13 @@ export const Main = () => {
                 </td>
                 <td className="w1 nowrap v-middle">
                     <div className="card">
+                        <a onClick={() => show(ref_abs)}>ABC</a>
+                    </div>
+                </td>
+                <td className="w1 nowrap v-middle">
+                    <div className="card">
                         <a onClick={() => show(ref_all_ingredients)}>Ingredients</a>
                     </div>
-                </td>
-                <td className="w1 nowrap v-middle">
-                    <div className="card">
-                        <a onClick={() => show(ref_random)}>Random Burger</a>
-                    </div>
-                </td>
-                <td className="w1 nowrap v-middle">
-                    <div className="card">
-                        <a onClick={() => show(ref_new_burger)}>New Burger</a>
-                    </div>
-                </td>
-                <td>
                 </td>
             </tr>
             </tbody>
@@ -88,9 +80,6 @@ export const Main = () => {
             </div>
             <div ref={ref_random}>
                 <TabRandomBurger/>
-            </div>
-            <div ref={ref_new_burger} style={hidden}>
-                <TabNewBurger/>
             </div>
         </div>
     </div>
