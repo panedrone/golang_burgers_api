@@ -98,7 +98,7 @@ Linux:
 
 ### HTTP Testing
 
-```http request
+```
 
 ### Search Burgers by Name
 
@@ -150,7 +150,7 @@ Content-Type: application/json
 }
 ```
 
-```http request
+```
 ### Search ingredient by Name
 
 GET http://localhost:8080/api/ingredients/search?name=beef
@@ -160,7 +160,7 @@ GET http://localhost:8080/api/ingredients/search?name=beef
 GET http://localhost:8080/api/ingredients/1
 ```
 
-```http request
+```
 # curl -X POST http://localhost:8080/upload
 #  -F "file=@/Users/appleboy/test.zip"
 #  -H "Content-Type: multipart/form-data"
