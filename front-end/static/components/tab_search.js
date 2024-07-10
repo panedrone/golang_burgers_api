@@ -36,7 +36,50 @@ function fetchSearchResults() {
     })
 }
 
-let _hideLogo = () => {}
+const FirstLetters = () => {
+
+    const [state, setState] = React.useState(null)
+
+    function load() {
+        api.getJson(`api/burgers/search/first-letters`, (json) => {
+            setState(json)
+        })
+    }
+
+    React.useEffect(() => {
+        load()
+    }, [])
+
+    return <div>
+        {
+            state === null
+                ?
+                ""
+                :
+                <span>
+                    {
+                        state.map((letter, index) => {
+                                return (
+                                    <a key={index} style={{margin: "10px"}} href="#"
+                                       onClick={() => loadByLetter(letter)}>{letter}</a>
+                                )
+                            }
+                        )
+                    }
+                </span>
+        }
+    </div>
+}
+
+let loadByLetter = (letter) => {
+    api.getJsonArray(`api/burgers/search/first-letter?letter=${letter}`, (arr) => {
+        _hideLogo()
+        _updateSearchResult(arr)
+    })
+}
+
+let _hideLogo = () => {
+}
 
 export const TabSearch = () => {
 
@@ -79,6 +122,10 @@ export const TabSearch = () => {
             </tr>
             </tbody>
         </table>
+
+        <p>
+            <FirstLetters/>
+        </p>
 
         <div ref={ref_logo} style={{
             minHeight: "320px",
