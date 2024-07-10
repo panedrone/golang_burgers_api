@@ -15,12 +15,12 @@ const App = () => {
         //
     });
 
-    return <table className="bg">
+    return <table className="w100">
         <tbody>
         <tr>
             <td>
                 <div className="card">
-                    <table className="bg">
+                    <table className="w100">
                         <tbody>
                         <tr>
                             <td className="v-middle">

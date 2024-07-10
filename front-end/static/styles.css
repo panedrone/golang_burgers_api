@@ -1,3 +1,7 @@
+html {
+    min-height: 101%; /* to avoid horizontal because right scroll */
+}
+
 body {
     font-family: 'trebuchet MS', 'Lucida sans', Arial, serif;
     font-size: 10pt;
