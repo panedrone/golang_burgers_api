@@ -26,7 +26,7 @@ export const PasswordField = ({onChange, saveUpdater}) => {
     )
 }
 
-export const StringField = ({onChange, saveUpdater, initial=""}) => {
+export const StringField = ({onChange, saveUpdater, initial="", placeholder=""}) => {
 
     const refDom = React.useRef()
 
@@ -51,7 +51,7 @@ export const StringField = ({onChange, saveUpdater, initial=""}) => {
 
     return (
         <label>
-            <input type="text" ref={refDom} onChange={handleChange}/>
+            <input type="text" ref={refDom} onChange={handleChange} placeholder={placeholder}/>
         </label>
     )
 }

@@ -1,10 +1,11 @@
-import React, {useState} from "react";
+import React from "react";
+
 import * as api from "./api";
 import {TableBurgers} from "./table_burgers";
 
 const FirstLetters = () => {
 
-    const [state, setState] = useState(null)
+    const [state, setState] = React.useState(null)
 
     function load() {
         api.getJson(`api/burgers/search/first-letters`, (json) => {

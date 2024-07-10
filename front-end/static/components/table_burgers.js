@@ -1,11 +1,12 @@
 import React, {useState} from "react";
+
 import {IngredientList} from "./ingredient_list";
 
 const BurgerRow = ({burger}) => {
 
     return <tr>
         <td className="w1">
-            <img src={burger.image_url} style={{width: "320px", height: "auto", padding: "10px"}} />
+            <img src={burger.image_url} style={{width: "320px", height: "auto", padding: "10px"}} alt={burger.name}/>
         </td>
         <td>
             <h3>{burger.name}</h3>
@@ -31,7 +32,7 @@ export const TableBurgers = ({saveStateSetter}) => {
                 :
                 <tbody>
                 {
-                    state.map((burger, index) => {
+                    state.map((burger) => {
                             return (
                                 <BurgerRow burger={burger}/>
                             )
