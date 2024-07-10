@@ -42,7 +42,8 @@ const IngredientList = ({initial}) => {
                         initial.map((ingredient, index) => {
                                 return (
                                     <li key={index} className="nowrap">
-                                        <a href="#" onClick={() => fire.activateSearchByIngredient(ingredient.name)}>{ingredient.name}</a>
+                                        <a href="#"
+                                           onClick={() => fire.activateSearchByIngredient(ingredient.name)}>{ingredient.name}</a>
                                     </li>
                                 )
                             }
@@ -53,13 +54,13 @@ const IngredientList = ({initial}) => {
     </>
 }
 
-export const RandomBurger = () => {
+export const TabRandomBurger = () => {
 
-    const [burgerData, setBurgerData] = useState(null)
+    const [stateBurger, setStateBurger] = useState(null)
 
     function randomBurger() {
         api.getJson(`api/burgers/random`, (json) => {
-            setBurgerData(json)
+            setStateBurger(json)
         })
     }
 
@@ -76,14 +77,14 @@ export const RandomBurger = () => {
 
     return <div>
         {
-            burgerData === null ? "" :
+            stateBurger === null ? "" :
                 <div>
                     <div>
-                        <table className={"bg"}>
+                        <table className={"w100"}>
                             <tbody>
                             <tr>
                                 <td className="v-middle">
-                                    <h2>{burgerData.name}</h2>
+                                    <h2>{stateBurger.name}</h2>
                                 </td>
                                 <td className="w1 v-middle">
                                     <a href="#">
@@ -93,7 +94,7 @@ export const RandomBurger = () => {
                             </tr>
                             <tr>
                                 <td colSpan={2}>
-                                    <p>{burgerData.description}</p>
+                                    <p>{stateBurger.description}</p>
                                 </td>
                             </tr>
                             </tbody>
@@ -105,12 +106,12 @@ export const RandomBurger = () => {
                             <tr>
                                 <td>
                                     {
-                                        burgerData.image_url === null ? "" :
-                                            <img src={burgerData.image_url} style={{width: "660px", height: "auto"}}/>
+                                        // stateBurger.image_url === null ? "" :
+                                        <img src={stateBurger.image_url} style={{width: "640px", height: "auto"}}/>
                                     }
                                 </td>
                                 <td>
-                                    <IngredientList initial={burgerData.ingredients}/>
+                                    <IngredientList initial={stateBurger.ingredients}/>
                                 </td>
                             </tr>
                             </tbody>
