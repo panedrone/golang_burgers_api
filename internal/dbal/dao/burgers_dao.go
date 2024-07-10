@@ -33,21 +33,26 @@ func (b *burgersDao) LookupByID(ctx context.Context, bID int64) (res *model.Burg
 	return
 }
 
-func (b *burgersDao) SearchByName(ctx context.Context, cName string) (res []*model.Burger, err error) {
-	key := fmt.Sprintf("%%%s%%", strings.ToLower(cName))
-	err = b.db.WithContext(ctx).Model(&model.Burger{}).
-		Preload(model.BurgerIngredients).
-		Where("LOWER(burger_name) LIKE ?", key).Find(&res).Error
-	return
-}
-
-func (b *burgersDao) SearchByIngredient(ctx context.Context, cIngredientName string) (res []*model.Burger, err error) {
-	key := fmt.Sprintf("%%%s%%", strings.ToLower(cIngredientName))
-	subQuery := b.db.Model(&model.Ingredient{}).Select("DISTINCT(burger_ingredients.burger_id)").Joins("inner join burger_ingredients ON id = burger_ingredients.ingredient_id").
-		Where("LOWER(ingredient_name) LIKE ?", key)
-	err = b.db.WithContext(ctx).Model(&model.Burger{}).
-		Preload(model.BurgerIngredients).
-		Where("id in (?)", subQuery).Find(&res).Error
+func (b *burgersDao) Search(ctx context.Context, cName string, cIngredientName string) (res []*model.Burger, err error) {
+	if len(cIngredientName) < 2 && len(cName) < 2 {
+		return
+	}
+	tx := b.db.WithContext(ctx).Model(&model.Burger{}).Preload(model.BurgerIngredients)
+	if len(cIngredientName) > 0 {
+		tx.Scopes(func(db *gorm.DB) *gorm.DB {
+			key := fmt.Sprintf("%%%s%%", strings.ToLower(cIngredientName))
+			subQuery := b.db.Model(&model.Ingredient{}).Select("DISTINCT(burger_ingredients.burger_id)").Joins("inner join burger_ingredients ON id = burger_ingredients.ingredient_id").
+				Where("LOWER(ingredient_name) LIKE ?", key)
+			return db.Where("id in (?)", subQuery).Find(&res)
+		})
+	}
+	if len(cName) > 0 {
+		tx.Scopes(func(db *gorm.DB) *gorm.DB {
+			key := fmt.Sprintf("%%%s%%", strings.ToLower(cName))
+			return db.Where("LOWER(burger_name) LIKE ?", key)
+		})
+	}
+	err = tx.Find(&res).Error
 	return
 }
 

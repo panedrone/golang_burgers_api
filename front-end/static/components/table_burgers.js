@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 
 import {IngredientList} from "./ingredient_list";
 
@@ -18,7 +18,7 @@ const BurgerRow = ({burger}) => {
 
 export const TableBurgers = ({saveStateSetter}) => {
 
-    const [state, setState] = useState(null)
+    const [state, setState] = React.useState(null)
 
     if (saveStateSetter) {
         saveStateSetter(setState)

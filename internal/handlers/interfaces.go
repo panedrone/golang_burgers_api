@@ -5,8 +5,7 @@ import (
 )
 
 type Burgers interface {
-	BurgersSearchByName(ctx *gin.Context)
-	BurgersSearchByIngredient(ctx *gin.Context)
+	BurgersSearch(ctx *gin.Context)
 
 	BurgerCreate(ctx *gin.Context)
 	BurgerLookupByID(ctx *gin.Context)

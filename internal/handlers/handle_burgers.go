@@ -20,45 +20,26 @@ func NewBurgers() Burgers {
 	}
 }
 
-// BurgersSearchByName
+// BurgersSearch
 //
-//	@Summary	Search Burgers by Name
+//	@Summary	Search Burgers by Name and/or Ingredient
 //	@Tags		Burgers
-//	@Id			BurgersSearchByName
+//	@Id			BurgersSearch
 //	@Produce	json
 //	@Success	200	{object}	[]model.Burger	"Burgers list"
 //	@Failure	500
 //	@Security	none
 //	@Router		/burgers/search [get]
-//	@Param		name	query		string	false	"Name Key"	example(abc)
-func (b *burgers) BurgersSearchByName(ctx *gin.Context) {
-	name := ctx.Query("name")
-	if len(name) == 0 {
+//	@Param		b	query		string	false	"Burger Name Key"	example(abc)
+//	@Param		i	query		string	false	"Ingredient Name Key"	example(abc)
+func (b *burgers) BurgersSearch(ctx *gin.Context) {
+	bName := ctx.Query("b")
+	iName := ctx.Query("i")
+	if len(bName) < 2 && len(iName) < 2 {
 		resp.Abort400hBadRequest(ctx, "name is required")
 		return
 	}
-	res, err := b.bDao.SearchByName(ctx, name)
-	if err != nil {
-		resp.Abort500(ctx, err)
-		return
-	}
-	resp.JSON(ctx, http.StatusOK, res)
-}
-
-// BurgersSearchByIngredient
-//
-//	@Summary	Search Burgers by FindByIngredient Name
-//	@Tags		Burgers
-//	@Id			BurgersSearchByIngredient
-//	@Produce	json
-//	@Success	200	{object}	[]model.Burger	"Burgers list"
-//	@Failure	500
-//	@Security	none
-//	@Router		/burgers/search/ingredient [get]
-//	@Param		name	query		string	false	"Ingredient Name Key"	example(abc)
-func (b *burgers) BurgersSearchByIngredient(ctx *gin.Context) {
-	name := ctx.Query("name")
-	res, err := b.bDao.SearchByIngredient(ctx, name)
+	res, err := b.bDao.Search(ctx, bName, iName)
 	if err != nil {
 		resp.Abort500(ctx, err)
 		return

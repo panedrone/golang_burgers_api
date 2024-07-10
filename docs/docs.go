@@ -99,7 +99,7 @@ const docTemplate = `{
                     "Burgers"
                 ],
                 "summary": "Search Burgers by Name",
-                "operationId": "BurgersSearchByName",
+                "operationId": "BurgersSearch",
                 "parameters": [
                     {
                         "type": "string",

@@ -6,8 +6,7 @@ import (
 )
 
 type BurgersDao interface {
-	SearchByName(ctx context.Context, cName string) (res []*model.Burger, err error)
-	SearchByIngredient(ctx context.Context, cIngredientName string) (res []*model.Burger, err error)
+	Search(ctx context.Context, cName string, cIngredientName string) (res []*model.Burger, err error)
 
 	Create(ctx context.Context, item *model.Burger) error
 	LookupByID(ctx context.Context, cID int64) (*model.Burger, error)
