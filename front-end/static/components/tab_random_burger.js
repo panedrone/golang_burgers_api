@@ -2,6 +2,7 @@ import React, {useState} from "react";
 
 import * as api from "./api"
 import fire from "./event_bus";
+import {IngredientList} from "./ingredient_list";
 
 let _burger = {
     "id": 19,
@@ -29,30 +30,6 @@ let _burger = {
 }
 
 _burger = null
-
-const IngredientList = ({initial}) => {
-    return <>
-        {
-            initial === null
-                ?
-                ""
-                :
-                <ul>
-                    {
-                        initial.map((ingredient, index) => {
-                                return (
-                                    <li key={index} className="nowrap">
-                                        <a href="#"
-                                           onClick={() => fire.activateSearchByIngredient(ingredient.name)}>{ingredient.name}</a>
-                                    </li>
-                                )
-                            }
-                        )
-                    }
-                </ul>
-        }
-    </>
-}
 
 export const TabRandomBurger = () => {
 
