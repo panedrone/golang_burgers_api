@@ -11,10 +11,6 @@ function _assignServerErrorUpdater(updater) {
 
 const App = () => {
 
-    React.useEffect(() => {
-        //
-    });
-
     return <table className="w100">
         <tbody>
         <tr>

@@ -58,7 +58,7 @@ func (i *ingredients) IngredientSearchByName(ctx *gin.Context) {
 //	@Failure	404
 //	@Failure	500
 //	@Security	none
-//	@Router		/burgers/{ingredient_Id} [get]
+//	@Router		/ingredients/{ingredient_Id} [get]
 //	@Param		ingredient_Id	path	integer	true	"Ingredient ID"
 func (i *ingredients) IngredientLookupByID(ctx *gin.Context) {
 	uri, err := request.BindIngredientUri(ctx)
@@ -75,4 +75,26 @@ func (i *ingredients) IngredientLookupByID(ctx *gin.Context) {
 	}
 	resp.JSON(ctx, http.StatusOK, res)
 
+}
+
+// IngredientsReadAll
+//
+//	@Summary	Lookup all Ingredients
+//	@Tags		Ingredients
+//	@Id			IngredientsReadAll
+//	@Produce	json
+//	@Success	200	{object}	[]model.Ingredient	"Ingredient List"
+//	@Failure	400
+//	@Failure	404
+//	@Failure	500
+//	@Security	none
+//	@Router		/ingredients [get]
+func (i *ingredients) IngredientsReadAll(ctx *gin.Context) {
+	d := dbal.NewIngredientsDao()
+	res, err := d.ReadAll(ctx)
+	if err != nil {
+		resp.Abort500(ctx, err)
+		return
+	}
+	resp.JSON(ctx, http.StatusOK, res)
 }

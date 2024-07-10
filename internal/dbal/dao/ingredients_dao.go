@@ -29,3 +29,8 @@ func (d *ingredientsDao) LookupIngredientByID(ctx context.Context, iID int64) (r
 	//}
 	return
 }
+
+func (d *ingredientsDao) ReadAll(ctx context.Context) (res []*model.Ingredient, err error) {
+	err = d.db.WithContext(ctx).Model(&model.Ingredient{}).Order("ingredient_name").Find(&res).Error
+	return
+}

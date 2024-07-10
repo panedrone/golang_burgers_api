@@ -279,7 +279,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/burgers/{ingredient_Id}": {
+        "/ingredients": {
             "get": {
                 "security": [
                     {
@@ -292,22 +292,16 @@ const docTemplate = `{
                 "tags": [
                     "Ingredients"
                 ],
-                "summary": "Lookup full Ingredient details by id",
-                "operationId": "IngredientLookupByID",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Ingredient ID",
-                        "name": "ingredient_Id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
+                "summary": "Lookup all Ingredients",
+                "operationId": "IngredientsReadAll",
                 "responses": {
                     "200": {
-                        "description": "Ingredient data",
+                        "description": "Ingredient List",
                         "schema": {
-                            "$ref": "#/definitions/app_internal_model.Ingredient"
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/app_internal_model.Ingredient"
+                            }
                         }
                     },
                     "400": {
@@ -352,6 +346,49 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/app_internal_model.Ingredient"
                         }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/ingredients/{ingredient_Id}": {
+            "get": {
+                "security": [
+                    {
+                        "none": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Ingredients"
+                ],
+                "summary": "Lookup full Ingredient details by id",
+                "operationId": "IngredientLookupByID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Ingredient ID",
+                        "name": "ingredient_Id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ingredient data",
+                        "schema": {
+                            "$ref": "#/definitions/app_internal_model.Ingredient"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
                     },
                     "500": {
                         "description": "Internal Server Error"
