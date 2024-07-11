@@ -249,9 +249,9 @@ paths:
       summary: Lookup full Ingredient details by id
       tags:
       - Ingredients
-  /ingredients/search:
+  /ingredients/find:
     get:
-      operationId: IngredientSearchByName
+      operationId: IngredientFindByName
       parameters:
       - description: Name Key
         example: abc
@@ -270,6 +270,31 @@ paths:
       security:
       - none: []
       summary: Search Ingredient by Name
+      tags:
+      - Ingredients
+  /ingredients/search:
+    get:
+      operationId: IngredientsSearch
+      parameters:
+      - description: Ingredient Name Key
+        example: abc
+        in: query
+        name: key
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Ingredient list
+          schema:
+            items:
+              $ref: '#/definitions/app_internal_model.Ingredient'
+            type: array
+        "500":
+          description: Internal Server Error
+      security:
+      - none: []
+      summary: Search Burgers by Name and/or Ingredient
       tags:
       - Ingredients
 produces:

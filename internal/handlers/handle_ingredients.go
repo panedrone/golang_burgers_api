@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"app/internal/dbal"
-	"app/internal/dbal/dao"
 	"app/internal/handlers/request"
 	"app/internal/handlers/resp"
 	"app/internal/model"
@@ -11,27 +10,24 @@ import (
 )
 
 type ingredients struct {
-	iDao dao.IngredientsDao
 }
 
 func NewIngredients() Ingredients {
-	return &ingredients{
-		iDao: dbal.NewIngredientsDao(),
-	}
+	return &ingredients{}
 }
 
-// IngredientSearchByName
+// IngredientFindByName
 //
 //	@Summary	Search Ingredient by Name
 //	@Tags		Ingredients
-//	@Id			IngredientSearchByName
+//	@Id			IngredientFindByName
 //	@Produce	json
 //	@Success	200	{object}	model.Ingredient	"Ingredient"
 //	@Failure	500
 //	@Security	none
-//	@Router		/ingredients/search [get]
+//	@Router		/ingredients/find [get]
 //	@Param		name	query		string	false	"Name Key"	example(abc)
-func (i *ingredients) IngredientSearchByName(ctx *gin.Context) {
+func (i *ingredients) IngredientFindByName(ctx *gin.Context) {
 	name := ctx.Query("name")
 	if len(name) == 0 {
 		resp.Abort400hBadRequest(ctx, "name is required")
@@ -92,6 +88,32 @@ func (i *ingredients) IngredientLookupByID(ctx *gin.Context) {
 func (i *ingredients) IngredientsReadAll(ctx *gin.Context) {
 	d := dbal.NewIngredientsDao()
 	res, err := d.ReadAll(ctx)
+	if err != nil {
+		resp.Abort500(ctx, err)
+		return
+	}
+	resp.JSON(ctx, http.StatusOK, res)
+}
+
+// IngredientsSearch
+//
+//	@Summary	Search Burgers by Name and/or Ingredient
+//	@Tags		Ingredients
+//	@Id			IngredientsSearch
+//	@Produce	json
+//	@Success	200	{object}	[]model.Ingredient	"Ingredient list"
+//	@Failure	500
+//	@Security	none
+//	@Router		/ingredients/search [get]
+//	@Param		key	query		string	false	"Ingredient Name Key"	example(abc)
+func (i *ingredients) IngredientsSearch(ctx *gin.Context) {
+	iName := ctx.Query("key")
+	if len(iName) < 1 {
+		resp.Abort400hBadRequest(ctx, "invalid query params")
+		return
+	}
+	d := dbal.NewIngredientsDao()
+	res, err := d.Search(ctx, iName)
 	if err != nil {
 		resp.Abort500(ctx, err)
 		return

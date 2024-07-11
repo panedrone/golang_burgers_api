@@ -3,7 +3,9 @@ package dao
 import (
 	"app/internal/model"
 	"context"
+	"fmt"
 	"gorm.io/gorm"
+	"strings"
 )
 
 type ingredientsDao struct {
@@ -32,5 +34,15 @@ func (d *ingredientsDao) LookupIngredientByID(ctx context.Context, iID int64) (r
 
 func (d *ingredientsDao) ReadAll(ctx context.Context) (res []*model.Ingredient, err error) {
 	err = d.db.WithContext(ctx).Model(&model.Ingredient{}).Order("ingredient_name").Find(&res).Error
+	return
+}
+
+func (d *ingredientsDao) Search(ctx context.Context, cIngredientName string) (res []*model.Ingredient, err error) {
+	if len(cIngredientName) > 0 {
+		key := fmt.Sprintf("%%%s%%", strings.ToLower(cIngredientName))
+		err = d.db.WithContext(ctx).Model(&model.Ingredient{}).Where("LOWER(ingredient_name) LIKE ?", key).
+			Order("ingredient_name").
+			Find(&res).Error
+	}
 	return
 }

@@ -29,9 +29,10 @@ func SetupHandlers(myRouter *gin.Engine) {
 	{
 		handleIngredients := NewIngredients()
 		groupIngredients := groupApi.Group("/ingredients")
-		groupIngredients.GET("/search", handleIngredients.IngredientSearchByName)
+		groupIngredients.GET("/find", handleIngredients.IngredientFindByName)
 		groupIngredients.GET("/:ingredient_id", handleIngredients.IngredientLookupByID)
 		groupIngredients.GET("/", handleIngredients.IngredientsReadAll)
+		groupIngredients.GET("/search", handleIngredients.IngredientsSearch)
 	}
 	{
 		groupImages := groupApi.Group("/images")

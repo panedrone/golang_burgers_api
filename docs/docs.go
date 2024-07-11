@@ -326,7 +326,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/ingredients/search": {
+        "/ingredients/find": {
             "get": {
                 "security": [
                     {
@@ -340,7 +340,7 @@ const docTemplate = `{
                     "Ingredients"
                 ],
                 "summary": "Search Ingredient by Name",
-                "operationId": "IngredientSearchByName",
+                "operationId": "IngredientFindByName",
                 "parameters": [
                     {
                         "type": "string",
@@ -355,6 +355,46 @@ const docTemplate = `{
                         "description": "Ingredient",
                         "schema": {
                             "$ref": "#/definitions/app_internal_model.Ingredient"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/ingredients/search": {
+            "get": {
+                "security": [
+                    {
+                        "none": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Ingredients"
+                ],
+                "summary": "Search Burgers by Name and/or Ingredient",
+                "operationId": "IngredientsSearch",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "example": "abc",
+                        "description": "Ingredient Name Key",
+                        "name": "key",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ingredient list",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/app_internal_model.Ingredient"
+                            }
                         }
                     },
                     "500": {

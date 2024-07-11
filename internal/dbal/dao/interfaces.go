@@ -22,4 +22,6 @@ type IngredientsDao interface {
 	LookupIngredientByID(ctx context.Context, iID int64) (*model.Ingredient, error)
 
 	ReadAll(ctx context.Context) (res []*model.Ingredient, err error)
+
+	Search(ctx context.Context, cIngredientName string) (res []*model.Ingredient, err error)
 }

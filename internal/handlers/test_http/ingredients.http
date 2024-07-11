@@ -1,7 +1,11 @@
 ### Search ingredient by Name
 
-GET http://localhost:8080/api/ingredients/search?name=beef
+GET http://localhost:8080/api/ingredients/find?name=beef
 
 ### Lookup full ingredient details by id
 
 GET http://localhost:8080/api/ingredients/1
+
+### Search ingredients by Name Key
+
+GET http://localhost:8080/api/ingredients/search?key=nio

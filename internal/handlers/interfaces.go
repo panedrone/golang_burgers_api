@@ -17,7 +17,8 @@ type Burgers interface {
 }
 
 type Ingredients interface {
-	IngredientSearchByName(ctx *gin.Context)
+	IngredientFindByName(ctx *gin.Context)
 	IngredientLookupByID(ctx *gin.Context)
 	IngredientsReadAll(ctx *gin.Context)
+	IngredientsSearch(ctx *gin.Context)
 }
