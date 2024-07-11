@@ -69,16 +69,22 @@ Stop the app with ^C.
 
 ### Dockerized app
 
-Run the App
-
-```shell
-docker-compose -f ./docker-compose.yml  up -d
-```
-
 Stop the App
 
 ```shell
 docker-compose -f ./docker-compose.yml down
+```
+
+Build the Image
+
+```shell
+ docker-compose -f ./docker-compose.yml build
+```
+
+Run the App
+
+```shell
+docker-compose -f ./docker-compose.yml up -d
 ```
 
 ### Generate Open API Docs
