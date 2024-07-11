@@ -34,7 +34,7 @@ func SetupHandlers(myRouter *gin.Engine) {
 		groupIngredients.GET("/", handleIngredients.IngredientsReadAll)
 	}
 	{
-		groupFiles := groupApi.Group("/files")
-		groupFiles.POST("/", PostFile)
+		groupImages := groupApi.Group("/images")
+		groupImages.POST("/", UploadBurgerImage)
 	}
 }

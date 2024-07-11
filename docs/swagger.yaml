@@ -171,6 +171,34 @@ paths:
       summary: List All starting Letters of Burger Names
       tags:
       - Burgers
+  /images:
+    post:
+      operationId: UploadBurgerImage
+      parameters:
+      - default: multipart/form-data; boundary=WebAppBoundary
+        description: Constant
+        in: header
+        name: 'Content-Type:'
+        required: true
+        type: string
+      - default: form-data; name="file"; filename="<Insert image file name here>"
+        description: Insert image file name here
+        in: header
+        name: Content-Disposition
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+        "500":
+          description: Internal Server Error
+      security:
+      - none: []
+      summary: Upload Burger Image
+      tags:
+      - Burger Images
   /ingredients:
     get:
       operationId: IngredientsReadAll

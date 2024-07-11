@@ -13,7 +13,19 @@ const (
 	ImgFolder = "front-end/" + UrlPath
 )
 
-func PostFile(ctx *gin.Context) {
+// UploadBurgerImage
+//
+//	@Summary	Upload Burger Image
+//	@Tags		Burger Images
+//	@Id			UploadBurgerImage
+//	@Produce	json
+//	@Success	201
+//	@Failure	500
+//	@Security	none
+//	@Router		/images [post]
+//	@Param		Content-Type: header	string	true	"Constant" default(multipart/form-data; boundary=WebAppBoundary)
+//	@Param		Content-Disposition	header	string	true	"Insert image file name here" default(form-data; name="file"; filename="<Insert image file name here>")
+func UploadBurgerImage(ctx *gin.Context) {
 	// single file
 	file, err := ctx.FormFile("file")
 	if err != nil {

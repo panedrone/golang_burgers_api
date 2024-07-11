@@ -246,6 +246,49 @@ const docTemplate = `{
                 }
             }
         },
+        "/images": {
+            "post": {
+                "security": [
+                    {
+                        "none": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Burger Images"
+                ],
+                "summary": "Upload Burger Image",
+                "operationId": "UploadBurgerImage",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "multipart/form-data; boundary=WebAppBoundary",
+                        "description": "Constant",
+                        "name": "Content-Type:",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "form-data; name=\"file\"; filename=\"\u003cInsert image file name here\u003e\"",
+                        "description": "Insert image file name here",
+                        "name": "Content-Disposition",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
         "/ingredients": {
             "get": {
                 "security": [
