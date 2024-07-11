@@ -170,7 +170,7 @@ GET http://localhost:8080/api/ingredients/1
 # curl -X POST http://localhost:8080/upload
 #  -F "file=@/Users/appleboy/test.zip"
 #  -H "Content-Type: multipart/form-data"
-POST http://localhost:8080/api/files
+POST http://localhost:8080/api/images
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 
 --WebAppBoundary
