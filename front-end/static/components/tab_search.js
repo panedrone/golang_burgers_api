@@ -99,24 +99,18 @@ export const TabSearch = () => {
             <tbody>
             <tr>
                 <td className="v-middle w1 nowrap">
-                    Burger Name
+                    <a href={"#"} onClick={() => _burger_set("")}>Burger Name</a>
                 </td>
                 <td className="v-middle">
                     <StringField onChange={(v) => _burger_name = v} saveUpdater={(u) => _burger_set = u}
                                  placeholder={"Type a Search Key"}/>
                 </td>
-                <td className="v-middle w1">
-                    <input type={"button"} value={"x"} onClick={() => _burger_set("")}/>
-                </td>
                 <td className="v-middle w1 nowrap">
-                    Ingredient
+                    <a href={"#"} onClick={() => _ingredient_set("")}>Ingredient</a>
                 </td>
                 <td className="v-middle">
                     <StringField onChange={(v) => _ingredient_name = v} saveUpdater={(u) => _ingredient_set = u}
                                  placeholder={"Type an Search Key"}/>
-                </td>
-                <td className="v-middle w1">
-                    <input type={"button"} value={"x"} onClick={() => _ingredient_set("")}/>
                 </td>
                 <td>
                 </td>
