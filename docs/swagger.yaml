@@ -269,7 +269,7 @@ paths:
           description: Internal Server Error
       security:
       - none: []
-      summary: Search Ingredient by Name
+      summary: Find Ingredient by exact Name
       tags:
       - Ingredients
   /ingredients/search:
@@ -294,7 +294,7 @@ paths:
           description: Internal Server Error
       security:
       - none: []
-      summary: Search Burgers by Name and/or Ingredient
+      summary: Search Ingredients by Name Key
       tags:
       - Ingredients
 produces:

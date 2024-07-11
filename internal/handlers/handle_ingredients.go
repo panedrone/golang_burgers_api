@@ -18,7 +18,7 @@ func NewIngredients() Ingredients {
 
 // IngredientFindByName
 //
-//	@Summary	Search Ingredient by Name
+//	@Summary	Find Ingredient by exact Name
 //	@Tags		Ingredients
 //	@Id			IngredientFindByName
 //	@Produce	json
@@ -97,7 +97,7 @@ func (i *ingredients) IngredientsReadAll(ctx *gin.Context) {
 
 // IngredientsSearch
 //
-//	@Summary	Search Burgers by Name and/or Ingredient
+//	@Summary	Search Ingredients by Name Key
 //	@Tags		Ingredients
 //	@Id			IngredientsSearch
 //	@Produce	json

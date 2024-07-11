@@ -339,7 +339,7 @@ const docTemplate = `{
                 "tags": [
                     "Ingredients"
                 ],
-                "summary": "Search Ingredient by Name",
+                "summary": "Find Ingredient by exact Name",
                 "operationId": "IngredientFindByName",
                 "parameters": [
                     {
@@ -376,7 +376,7 @@ const docTemplate = `{
                 "tags": [
                     "Ingredients"
                 ],
-                "summary": "Search Burgers by Name and/or Ingredient",
+                "summary": "Search Ingredients by Name Key",
                 "operationId": "IngredientsSearch",
                 "parameters": [
                     {
